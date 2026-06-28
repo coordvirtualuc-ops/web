@@ -1,52 +1,51 @@
 import * as React from "react"
-import { GraduationCap, Users, Handshake, MapPin } from "lucide-react"
+import { GraduationCap, BookOpen, Clock, Globe } from "lucide-react"
 import { Section } from "@/components/ui/Section"
 import { AnimatedReveal } from "@/components/ui/AnimatedReveal"
-import { siteConfig } from "@/content/site"
 
 export function StatsBlock() {
   const pillars = [
     {
       num: "01",
-      title: "Formación integral",
-      desc: "Más allá del aula. Fomentamos el desarrollo de profesionales éticos, responsables y comprometidos con la mejora de su entorno social y profesional.",
+      title: "Aprendizaje con impacto real",
+      desc: "Combinamos la teoría con la práctica activa para que resuelvas problemáticas reales de tu entorno desde el primer día.",
       icon: GraduationCap,
     },
     {
       num: "02",
-      title: "Acompañamiento cercano",
-      desc: "Atención personalizada para asegurar que cada estudiante encuentre su camino, resuelva sus dudas y potencie sus habilidades únicas.",
-      icon: Users,
+      title: "Certificación Cambridge",
+      desc: "Fortalecemos tu perfil profesional con el dominio del idioma inglés respaldado por estándares de nivel internacional.",
+      icon: Globe,
     },
     {
       num: "03",
-      title: "Vinculación y práctica",
-      desc: "Enfoque en la resolución de problemáticas reales para que adquieras experiencia útil, aplicable y valiosa para tu futuro laboral.",
-      icon: Handshake,
+      title: "Docentes y programas actualizados",
+      desc: "Planes de estudio vigentes impartidos por profesores con amplia experiencia y participación activa en su sector laboral.",
+      icon: BookOpen,
     },
     {
       num: "04",
-      title: "Ubicación estratégica",
-      desc: `Instalaciones accesibles en el corazón de Nayarit, diseñadas para tu comodidad. Nos encuentras en ${siteConfig.address.fullAddress}.`,
-      icon: MapPin,
+      title: "Modalidades flexibles",
+      desc: "Formatos y horarios diseñados para adaptarse a tu estilo de vida, permitiéndote trabajar y estudiar de manera equilibrada.",
+      icon: Clock,
     },
   ]
 
   return (
-    <Section id="nuestro-enfoque" background="light" padding="xl" className="border-t border-[var(--color-muted)]">
+    <Section id="modelo-educativo" background="light" padding="xl" className="border-t border-[var(--color-muted)]">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-start">
         
         {/* Columna Izquierda: Encabezado Sticky (Pegajoso) */}
         <div className="lg:col-span-5 lg:sticky lg:top-32">
           <AnimatedReveal direction="up">
             <h2 className="text-xs font-bold uppercase tracking-widest text-[var(--color-wine)] mb-4">
-              Nuestro Enfoque
+              Filosofía UC
             </h2>
             <h3 className="text-4xl md:text-5xl lg:text-[3.5rem] font-black text-[var(--color-text)] tracking-tight leading-[1.1] text-balance mb-6">
-              Una universidad pensada para acompañarte.
+              Modelo Educativo Humanista
             </h3>
             <p className="text-lg text-[var(--color-text)]/70 text-balance leading-relaxed">
-              En <span className="font-semibold text-[var(--color-wine)]">UC</span> la formación profesional no es un trámite; se vive con cercanía, orientación académica constante y un profundo sentido humano.
+              Formamos profesionistas comprometidos con su entorno, combinando excelencia académica, acompañamiento constante y una visión humanista que trasciende las aulas.
             </p>
           </AnimatedReveal>
         </div>

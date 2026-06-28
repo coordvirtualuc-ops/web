@@ -34,10 +34,10 @@ export function Header() {
           <Image
             src="/images/logo.png" 
             alt="Logo UC Universidad Continental"
-            width={250} 
-            height={60}
+            width={280} 
+            height={70}
             priority
-            className="h-10 sm:h-12 w-auto object-contain"
+            className="h-12 sm:h-16 w-auto object-contain"
           />
         </Link>
 
@@ -82,7 +82,10 @@ export function Header() {
         </nav>
 
         {/* Desktop CTA */}
-        <div className="hidden lg:block">
+        <div className="hidden lg:flex items-center gap-3">
+          <Button href={createWhatsAppLink(WHATSAPP_MESSAGES.ucVirtual)} target="_blank" rel="noopener noreferrer" variant="outline" size="sm" className="shadow-sm">
+            UC Virtual
+          </Button>
           <Button href={whatsappUrl} target="_blank" rel="noopener noreferrer" variant="primary" size="sm" className="shadow-md shadow-[var(--color-red)]/20">
             Solicitar información
           </Button>
@@ -147,7 +150,10 @@ export function Header() {
                 )}
               </div>
             ))}
-            <div className="pt-6">
+            <div className="pt-6 space-y-3">
+              <Button href={createWhatsAppLink(WHATSAPP_MESSAGES.ucVirtual)} target="_blank" rel="noopener noreferrer" variant="outline" className="w-full">
+                UC Virtual
+              </Button>
               <Button href={whatsappUrl} target="_blank" rel="noopener noreferrer" variant="primary" className="w-full shadow-lg shadow-[var(--color-red)]/20">
                 Solicitar información
               </Button>

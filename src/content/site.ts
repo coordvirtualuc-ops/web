@@ -2,10 +2,10 @@ export const siteConfig = {
   name: "UC Universidad Continental",
   shortName: "Universidad Continental",
   tagline: "Educación para la humanidad",
-  description: "Institución de educación superior en Tepic, Nayarit, comprometida con la formación integral de profesionales competentes, éticos y socialmente responsables.",
+  description: "Estudia en UC Universidad Continental en Tepic, Nayarit. Conoce nuestra oferta académica, modalidades flexibles, formación humanista y programas para impulsar tu futuro profesional.",
   mission: "Formar seres humanos con capacidades profesionales que generen conocimientos de excelencia académica para la resolución de problemáticas sociales, promoviendo el desarrollo sustentable comunitario, con actitud crítica y reflexiva, así como valores para la consolidación de una sociedad más justa, solidaria, humanista e inclusiva.",
   contact: {
-    phone: "311 218 5570",
+    phones: ["311 486 5734", "311 218 5570"],
     whatsapp: "311 110 0640",
     email: "uccontrolescolartepic@gmail.com",
   },
@@ -15,6 +15,7 @@ export const siteConfig = {
     city: "Tepic",
     state: "Nayarit",
     country: "México",
+    reference: "Entre Insurgentes y Herrera",
     fullAddress: "Calle Oaxaca #220 Col. Centro, Tepic, Nayarit",
   },
   schedule: {
@@ -35,6 +36,7 @@ export const siteConfig = {
   seo: {
     url: "https://example.com", // Temporal hasta definir dominio oficial
     keywords: [
+      "universidad Tepic Nayarit",
       "universidad en Tepic",
       "educación superior Nayarit",
       "licenciaturas Tepic",

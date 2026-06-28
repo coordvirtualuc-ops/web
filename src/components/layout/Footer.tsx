@@ -77,9 +77,19 @@ export function Footer() {
                 <span className="text-xs leading-tight block">{siteConfig.address.fullAddress}</span>
               </li>
               <li>
-                <span className="block font-semibold text-white mb-1">Teléfono:</span>
-                <a href={`tel:${siteConfig.contact.phone.replace(/\s/g, "")}`} className="hover:text-white transition-colors">
-                  {siteConfig.contact.phone}
+                <span className="block font-semibold text-white mb-1">Llámanos:</span>
+                <div className="flex flex-col gap-1 text-xs">
+                  {siteConfig.contact.phones.map((phone) => (
+                    <a key={phone} href={`tel:${phone.replace(/\s/g, "")}`} className="hover:text-white transition-colors">
+                      {phone}
+                    </a>
+                  ))}
+                </div>
+              </li>
+              <li>
+                <span className="block font-semibold text-white mb-1">WhatsApp:</span>
+                <a href={`https://wa.me/52${siteConfig.contact.whatsapp.replace(/\s/g, "")}`} target="_blank" rel="noopener noreferrer" className="text-xs hover:text-white transition-colors">
+                  {siteConfig.contact.whatsapp}
                 </a>
               </li>
               <li>

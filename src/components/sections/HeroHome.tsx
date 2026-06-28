@@ -2,10 +2,11 @@
 
 import * as React from "react"
 import Image from "next/image"
-import { ArrowRight, GraduationCap, Users, BookOpen } from "lucide-react"
+import { ArrowRight, GraduationCap, Users, BookOpen, Clock, Award } from "lucide-react"
 import { Button } from "@/components/ui/Button"
 import { AnimatedReveal } from "@/components/ui/AnimatedReveal"
 import { createWhatsAppLink, WHATSAPP_MESSAGES } from "@/lib/whatsapp"
+import { AutoScrollCarousel } from "@/components/ui/AutoScrollCarousel"
 
 export function HeroHome() {
   const whatsappUrl = createWhatsAppLink(WHATSAPP_MESSAGES.general)
@@ -20,27 +21,28 @@ export function HeroHome() {
   ]
 
   const valuePropositions = [
-    { title: "Oferta académica", desc: "Programas actualizados para el mundo de hoy.", icon: BookOpen },
-    { title: "Acompañamiento cercano", desc: "Atención personalizada en cada paso.", icon: Users },
-    { title: "Formación integral", desc: "Desarrollo profesional y humano ético.", icon: GraduationCap },
+    { title: "Más de 7 generaciones de egresados", desc: "", icon: Award },
+    { title: "Programas con RVOE", desc: "", icon: BookOpen },
+    { title: "Modalidades y horarios flexibles", desc: "", icon: Clock },
+    { title: "Docentes con preparación académica y experiencia profesional", desc: "", icon: GraduationCap },
   ]
 
   return (
-    <section className="relative w-full overflow-hidden bg-[var(--color-black)] pt-20 pb-20 lg:pt-32 lg:pb-32 flex items-center min-h-[90vh]">
+    <section className="relative w-full overflow-hidden bg-[var(--color-cream)] pt-20 pb-20 lg:pt-32 lg:pb-32 flex items-center min-h-[90vh]">
       
-      {/* Fondo Inmersivo (Estilo Streaming) */}
-      <div className="absolute inset-0 z-0">
+      {/* Fondo Inmersivo (Claro) */}
+      <div className="absolute inset-0 z-0 bg-[var(--color-cream)]">
         <Image
           src="/images/heroo-bg.webp" 
           alt="Estudiantes en UC Universidad Continental"
           fill
           priority
-          className="object-cover object-center opacity-60 filter blur-sm lg:blur-none"
+          className="object-cover object-[70%_center] opacity-30 sm:opacity-55 lg:opacity-75 mix-blend-multiply"
           sizes="100vw"
         />
-        {/* Gradientes oscuros para asegurar legibilidad */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent z-10"></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-black)] via-transparent to-black/30 z-10"></div>
+        {/* Gradientes direccionales para asegurar legibilidad */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[var(--color-cream)] via-[var(--color-cream)]/90 lg:via-[var(--color-cream)]/70 to-transparent z-10"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-cream)] via-[var(--color-cream)]/20 to-transparent z-10"></div>
       </div>
 
       <div className="relative z-20 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -50,15 +52,15 @@ export function HeroHome() {
           <div className="flex flex-col items-start lg:col-span-7">
             
             <AnimatedReveal direction="up" delay={0.1}>
-              <h1 className="text-4xl font-black tracking-tight text-white sm:text-5xl md:text-6xl lg:text-[4rem] leading-[1.05] text-balance mb-6 drop-shadow-lg">
-                Estudia en <span className="text-[var(--color-red)]">UC</span> <br className="hidden lg:block" />
-                Universidad Continental
+              <h1 className="text-4xl font-black tracking-tight text-[var(--color-text)] sm:text-5xl md:text-6xl lg:text-[4rem] leading-[1.05] text-balance mb-6 drop-shadow-sm">
+                Estudia en UC Universidad Continental en <br className="hidden lg:block" />
+                <span className="text-[var(--color-red)]">Tepic, Nayarit</span>
               </h1>
             </AnimatedReveal>
 
             <AnimatedReveal direction="up" delay={0.2}>
-              <p className="text-base sm:text-lg text-[#EFEFEF]/80 md:text-xl leading-relaxed text-balance mb-10 max-w-2xl drop-shadow-md">
-                Formación profesional, humana y cercana para estudiantes que buscan crecer con propósito, práctica y acompañamiento real.
+              <p className="text-base sm:text-lg text-[var(--color-text)]/80 md:text-xl leading-relaxed text-balance mb-10 max-w-2xl">
+                Una universidad en Tepic, Nayarit con enfoque humanista, acompañamiento cercano y programas de excelencia académica para impulsar tu futuro profesional.
               </p>
             </AnimatedReveal>
 
@@ -68,7 +70,7 @@ export function HeroHome() {
                   Solicitar información
                   <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
                 </Button>
-                <Button href="#oferta-academica" variant="outline" size="lg" className="border-white/30 text-white hover:bg-white/10 hover:text-white backdrop-blur-md">
+                <Button href="#oferta-academica" variant="outline" size="lg" className="border-[var(--color-wine)]/30 text-[var(--color-wine)] hover:bg-[var(--color-wine)] hover:text-white backdrop-blur-md">
                   Ver oferta académica
                 </Button>
               </div>
@@ -78,18 +80,17 @@ export function HeroHome() {
           {/* Columna Derecha: Bloque de valor institucional integrado */}
           <div className="flex flex-col gap-5 lg:col-span-5 w-full max-w-lg mx-auto lg:ml-auto">
             <AnimatedReveal direction="left" delay={0.4}>
-              <div className="flex flex-col gap-3 rounded-3xl bg-[var(--color-black)]/50 backdrop-blur-md p-6 border border-white/5 shadow-2xl">
-                <h4 className="text-sm font-bold uppercase tracking-widest text-[#EFEFEF]/50 mb-3 pl-1">Nuestro Compromiso:</h4>
+              <div className="flex flex-col gap-2 p-4">
+                <h4 className="text-sm font-bold uppercase tracking-widest text-[var(--color-wine)] mb-4 pl-1">¿Por qué elegir UC?</h4>
                 {valuePropositions.map((val, idx) => {
                   const Icon = val.icon
                   return (
-                    <div key={idx} className="flex items-center gap-4 p-4 rounded-xl transition-colors hover:bg-white/5">
-                      <div className="bg-white/10 p-3 rounded-lg text-white">
+                    <div key={idx} className="flex items-center gap-4 py-3 border-b border-[var(--color-wine)]/10 last:border-0 group">
+                      <div className="text-[var(--color-red)] group-hover:scale-110 transition-transform">
                         <Icon className="h-5 w-5" />
                       </div>
                       <div>
-                        <h3 className="font-semibold text-base text-white tracking-wide">{val.title}</h3>
-                        <p className="text-sm text-[#EFEFEF]/70 leading-snug">{val.desc}</p>
+                        <h3 className="font-semibold text-base text-[var(--color-text)] tracking-wide">{val.title}</h3>
                       </div>
                     </div>
                   )
@@ -101,24 +102,24 @@ export function HeroHome() {
         </div>
 
         {/* Sección de "Nuestras Carreras" (Estilo Portadas Verticales) */}
-        <div className="mt-16 lg:mt-24 pt-12 border-t border-white/10">
+        <div className="mt-16 lg:mt-24 pt-12 border-t border-[var(--color-wine)]/10">
           <AnimatedReveal direction="up" delay={0.5}>
             <div className="flex items-center justify-between mb-8">
-              <h2 className="text-xl sm:text-2xl font-black text-white tracking-tight uppercase">Licenciaturas Principales</h2>
-              <a href="#oferta-academica" className="inline-flex items-center text-sm font-medium text-white hover:text-[var(--color-red)] transition-colors group">
+              <h2 className="text-xl sm:text-2xl font-black text-[var(--color-wine)] tracking-tight uppercase">Licenciaturas Principales</h2>
+              <a href="#oferta-academica" className="inline-flex items-center text-sm font-medium text-[var(--color-text)]/70 hover:text-[var(--color-red)] transition-colors group">
                 <span className="hidden sm:inline">Ver oferta completa</span>
                 <span className="sm:hidden">Ver todas</span>
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </a>
             </div>
             
-            {/* Grid de Portadas */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-6">
+            {/* Carrusel de Portadas */}
+            <AutoScrollCarousel className="flex gap-4 lg:gap-6 pb-8 pt-4 -mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
               {mainBachelors.map((bachelor, index) => {
                 const wpUrl = createWhatsAppLink(bachelor.wp)
 
                 return (
-                  <div key={index} className="group relative aspect-[2/3] w-full rounded-2xl overflow-hidden cursor-pointer shadow-xl transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-[var(--color-wine)]/40 border border-white/10">
+                  <div key={index} className="group relative flex-none w-[76vw] sm:w-[280px] md:w-[300px] lg:w-[320px] xl:w-[340px] aspect-[2/3] rounded-2xl overflow-hidden cursor-pointer shadow-xl transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-[var(--color-wine)]/40 border border-[var(--color-wine)]/10 snap-center sm:snap-start">
                     
                     {/* Imagen de Portada */}
                     <Image
@@ -146,7 +147,7 @@ export function HeroHome() {
                   </div>
                 )
               })}
-            </div>
+            </AutoScrollCarousel>
           </AnimatedReveal>
         </div>
 
