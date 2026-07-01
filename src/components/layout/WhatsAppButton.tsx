@@ -9,15 +9,57 @@ import { createWhatsAppLink } from "@/lib/whatsapp"
 export function WhatsAppButton() {
   const [isOpen, setIsOpen] = useState(false)
   const [showBubble, setShowBubble] = useState(false)
+  const [isManuallyClosed, setIsManuallyClosed] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
 
-  // Timer to display bubble after 2.5 seconds
+  // Load manually closed state from sessionStorage on mount
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowBubble(true)
-    }, 2500)
-    return () => clearTimeout(timer)
+    if (typeof window !== "undefined") {
+      const closed = sessionStorage.getItem("uc-mascot-bubble-closed") === "true"
+      if (closed) {
+        setIsManuallyClosed(true)
+      }
+    }
   }, [])
+
+  // Timer to display/hide bubble cyclically:
+  // 1. Appears after 2.5s
+  // 2. Stays visible for 5s, then hides
+  // 3. Reappears after 12s, repeating if closed and not manually closed or chat open.
+  useEffect(() => {
+    if (isOpen || isManuallyClosed) {
+      setShowBubble(false)
+      return
+    }
+
+    let showTimer: NodeJS.Timeout
+    let hideTimer: NodeJS.Timeout
+    let loopTimer: NodeJS.Timeout
+
+    const startCycle = () => {
+      showTimer = setTimeout(() => {
+        setShowBubble(true)
+        
+        hideTimer = setTimeout(() => {
+          setShowBubble(false)
+          
+          loopTimer = setTimeout(() => {
+            startCycle()
+          }, 12000)
+          
+        }, 5000)
+
+      }, 2500)
+    }
+
+    startCycle()
+
+    return () => {
+      clearTimeout(showTimer)
+      clearTimeout(hideTimer)
+      clearTimeout(loopTimer)
+    }
+  }, [isOpen, isManuallyClosed])
 
   // Close with Escape key
   useEffect(() => {
@@ -50,20 +92,27 @@ export function WhatsAppButton() {
     }
   }
 
+  const handleManualCloseBubble = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    setShowBubble(false)
+    setIsManuallyClosed(true)
+    if (typeof window !== "undefined") {
+      sessionStorage.setItem("uc-mascot-bubble-closed", "true")
+    }
+  }
+
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end pointer-events-none">
       
       {/* Burbuja automática */}
       {showBubble && !isOpen && (
-        <div className="pointer-events-auto absolute bottom-20 right-0 md:right-3 flex items-center gap-2.5 bg-[#8c002a] text-[var(--color-cream)] px-4 py-2.5 rounded-2xl shadow-xl border border-white/10 animate-fade-in animate-bounce-subtle z-40 max-w-[260px] md:max-w-xs transition-all duration-300">
+        <div className="pointer-events-auto absolute bottom-20 right-0 md:right-3 flex items-center gap-2.5 bg-[#8c002a] text-[var(--color-cream)] px-4 py-2.5 rounded-2xl shadow-xl border border-white/10 animate-fade-in animate-bounce-subtle z-40 max-w-[calc(100vw-6rem)] sm:max-w-xs transition-all duration-300">
           <p className="text-xs sm:text-sm font-semibold leading-snug">
-            Te ayudamos a elegir tu programa.
+            <span className="inline sm:hidden">¿Tienes dudas?</span>
+            <span className="hidden sm:inline">Te ayudamos a elegir tu programa.</span>
           </p>
           <button
-            onClick={(e) => {
-              e.stopPropagation()
-              setShowBubble(false)
-            }}
+            onClick={handleManualCloseBubble}
             className="p-1 rounded-full text-white/80 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
             aria-label="Cerrar sugerencia"
           >
@@ -82,7 +131,7 @@ export function WhatsAppButton() {
           role="dialog"
           aria-modal="true"
           aria-label="Chat de orientación UC"
-          className="pointer-events-auto absolute bottom-20 right-0 w-[calc(100vw-3rem)] sm:w-[380px] bg-[var(--color-cream)] border border-[var(--color-wine)]/10 rounded-[2rem] shadow-2xl overflow-hidden flex flex-col z-40 transition-all duration-300 animate-scale-up origin-bottom-right"
+          className="pointer-events-auto fixed bottom-24 left-4 right-4 md:absolute md:bottom-20 md:right-0 md:left-auto md:w-[380px] bg-[var(--color-cream)] border border-[var(--color-wine)]/10 rounded-[2rem] shadow-2xl overflow-hidden flex flex-col z-40 transition-all duration-300 animate-scale-up origin-bottom-right"
         >
           {/* Header del Chat */}
           <div className="bg-[var(--color-wine)] text-white px-6 py-4 flex items-center justify-between border-b border-white/10">

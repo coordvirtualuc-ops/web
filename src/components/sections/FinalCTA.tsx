@@ -10,7 +10,7 @@ export function FinalCTA() {
   const whatsappUrl = createWhatsAppLink(WHATSAPP_MESSAGES.general)
 
   return (
-    <Section id="final-cta" padding="xl" className="bg-white text-[var(--color-text)] border-t border-[var(--color-wine)]/10">
+    <Section id="final-cta" padding="xl" className="bg-white text-[var(--color-text)] border-t border-[var(--color-wine)]/10 overflow-hidden relative">
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Patrón de fondo editorial sutil (sin contenedor de tarjeta) */}
