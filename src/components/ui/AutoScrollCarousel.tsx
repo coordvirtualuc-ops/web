@@ -2,8 +2,11 @@
 import * as React from "react"
 import { useRef, useEffect, useState } from "react"
 
-export function AutoScrollCarousel({ children, className = "" }: { children: React.ReactNode, className?: string }) {
-  const scrollRef = useRef<HTMLDivElement>(null)
+export const AutoScrollCarousel = React.forwardRef<HTMLDivElement, { children: React.ReactNode, className?: string }>(
+  ({ children, className = "" }, ref) => {
+    const scrollRef = useRef<HTMLDivElement>(null)
+
+    React.useImperativeHandle(ref, () => scrollRef.current!)
   const [isPaused, setIsPaused] = useState(false)
   const [isDragging, setIsDragging] = useState(false)
   
@@ -120,4 +123,6 @@ export function AutoScrollCarousel({ children, className = "" }: { children: Rea
       {children}
     </div>
   )
-}
+})
+
+AutoScrollCarousel.displayName = "AutoScrollCarousel"

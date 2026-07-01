@@ -1,4 +1,5 @@
 import * as React from "react"
+import Image from "next/image"
 import { GraduationCap, BookOpen, Clock, Globe } from "lucide-react"
 import { Section } from "@/components/ui/Section"
 import { AnimatedReveal } from "@/components/ui/AnimatedReveal"
@@ -8,19 +9,19 @@ export function StatsBlock() {
     {
       num: "01",
       title: "Aprendizaje con impacto real",
-      desc: "Combinamos la teoría con la práctica activa para que resuelvas problemáticas reales de tu entorno desde el primer día.",
+      desc: "Combinamos la teoría con la práctica activa para que resuelvas problemáticas reales de tu entorno desde el inicio de tu formación.",
       icon: GraduationCap,
     },
     {
       num: "02",
       title: "Certificación Cambridge",
-      desc: "Fortalecemos tu perfil profesional con el dominio del idioma inglés respaldado por estándares de nivel internacional.",
+      desc: "Fortalecemos tu perfil profesional con el dominio del idioma inglés respaldado por estándares de nivel internacional, obteniendo una Certificación que avale tu nivel de competencia.",
       icon: Globe,
     },
     {
       num: "03",
       title: "Docentes y programas actualizados",
-      desc: "Planes de estudio vigentes impartidos por profesores con amplia experiencia y participación activa en su sector laboral.",
+      desc: "Nuestros profesores altamente capacitados cuentan con experiencia activa, y nuestros programas son innovadores y actualizados para responder a las necesidades reales.",
       icon: BookOpen,
     },
     {
@@ -36,9 +37,21 @@ export function StatsBlock() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-start">
         
         {/* Columna Izquierda: Encabezado Sticky (Pegajoso) */}
-        <div className="lg:col-span-5 lg:sticky lg:top-32">
-          <AnimatedReveal direction="up">
-            <h2 className="text-xs font-bold uppercase tracking-widest text-[var(--color-wine)] mb-4">
+        <div className="lg:col-span-5 lg:sticky lg:top-32 relative overflow-hidden p-6 bg-white/20 backdrop-blur-sm rounded-3xl border border-[var(--color-wine)]/5">
+          
+          {/* Mascota Watermark de fondo */}
+          <div className="absolute -bottom-10 -left-10 w-44 h-44 opacity-[0.09] pointer-events-none select-none z-0 mascot-watermark">
+            <Image
+              src="/images/brand/mascota-uc.webp"
+              alt="Mascota Watermark"
+              fill
+              className="object-contain object-bottom-left"
+              sizes="176px"
+            />
+          </div>
+
+          <AnimatedReveal direction="up" className="relative z-10">
+            <h2 className="text-xs font-bold uppercase tracking-widest text-[var(--color-magenta)] mb-4">
               Filosofía UC
             </h2>
             <h3 className="text-4xl md:text-5xl lg:text-[3.5rem] font-black text-[var(--color-text)] tracking-tight leading-[1.1] text-balance mb-6">
@@ -60,20 +73,20 @@ export function StatsBlock() {
                 direction="up" 
                 delay={0.1 * index}
               >
-                <div className="group relative flex flex-col sm:flex-row items-start gap-6 sm:gap-10 py-10 border-b border-[var(--color-muted)] transition-colors hover:border-[var(--color-wine)]/30">
+                <div className="group relative flex flex-col sm:flex-row items-start gap-6 sm:gap-10 py-10 border-b border-[var(--color-muted)] transition-colors hover:border-b hover:border-[var(--color-magenta)]/30">
                   
                   {/* Número Editorial */}
-                  <div className="text-4xl sm:text-5xl font-black text-[var(--color-muted)] group-hover:text-[var(--color-red)]/20 transition-colors">
+                  <div className="text-4xl sm:text-5xl font-black text-[var(--color-muted)] group-hover:text-[var(--color-magenta)]/20 transition-colors">
                     {pillar.num}
                   </div>
 
                   {/* Contenido */}
                   <div className="flex-1 pt-1 sm:pt-2">
                     <div className="flex items-center gap-4 mb-3">
-                      <div className="bg-[var(--color-cream)] p-2.5 rounded-lg text-[var(--color-wine)] group-hover:bg-[var(--color-wine)] group-hover:text-white transition-colors">
+                      <div className="bg-[var(--color-cream)] p-2.5 rounded-lg text-[var(--color-magenta)] group-hover:bg-[var(--color-magenta)] group-hover:text-white transition-colors">
                         <Icon className="h-5 w-5" />
                       </div>
-                      <h4 className="text-2xl font-bold text-[var(--color-text)] group-hover:text-[var(--color-wine)] transition-colors">
+                      <h4 className="text-2xl font-bold text-[var(--color-text)] group-hover:text-[var(--color-magenta)] transition-colors">
                         {pillar.title}
                       </h4>
                     </div>
@@ -90,7 +103,7 @@ export function StatsBlock() {
           {/* Último elemento visual para cerrar la lista con elegancia */}
           <AnimatedReveal direction="up" delay={0.5}>
             <div className="pt-10 flex items-center gap-4 text-[var(--color-text)]/40 italic text-sm font-medium">
-              <div className="h-px w-12 bg-[var(--color-muted)]" />
+              <div className="h-px w-12 bg-[var(--color-magenta)]" />
               Educación para la humanidad
             </div>
           </AnimatedReveal>

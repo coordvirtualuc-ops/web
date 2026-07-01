@@ -1,4 +1,5 @@
 import * as React from "react"
+import Image from "next/image"
 import { MessageCircle, ArrowRight, MapPin, BookOpen, Clock } from "lucide-react"
 import { Section } from "@/components/ui/Section"
 import { Button } from "@/components/ui/Button"
@@ -55,8 +56,20 @@ export function FinalCTA() {
           </div>
 
           {/* Columna Derecha: Tarjetas de datos rápidos (Limpias) */}
-          <div className="lg:col-span-5 lg:pl-10">
-            <AnimatedReveal direction="left" delay={0.2} className="flex flex-col gap-0">
+          <div className="lg:col-span-5 lg:pl-10 relative overflow-hidden bg-white/20 backdrop-blur-sm rounded-3xl p-6 border border-[var(--color-wine)]/5">
+            
+            {/* Mascota Mini visible en esquina inferior */}
+            <div className="absolute -bottom-4 -right-4 w-28 h-28 md:w-40 md:h-40 opacity-95 pointer-events-none select-none z-0 mascot-float">
+              <Image
+                src="/images/brand/mascota-uc.webp"
+                alt="Mascota UC"
+                fill
+                className="object-contain object-bottom-right drop-shadow-md"
+                sizes="(max-width: 768px) 112px, 160px"
+              />
+            </div>
+
+            <AnimatedReveal direction="left" delay={0.2} className="flex flex-col gap-0 relative z-10">
               
               <div className="flex items-start gap-4 py-6 border-b border-[var(--color-wine)]/10">
                 <div className="mt-1 text-[var(--color-red)]">
@@ -73,7 +86,7 @@ export function FinalCTA() {
                   <Clock className="h-6 w-6" />
                 </div>
                 <div>
-                  <h4 className="font-bold text-lg mb-1 text-[var(--color-text)]">Atención x WhatsApp</h4>
+                  <h4 className="font-bold text-lg mb-1 text-[var(--color-text)]">Atención por WhatsApp</h4>
                   <p className="text-[var(--color-text)]/70 text-sm">Orientación rápida, directa y personalizada.</p>
                 </div>
               </div>

@@ -11,7 +11,10 @@ export const WHATSAPP_MESSAGES = {
   contabilidad: "Hola, quiero información sobre la Licenciatura en Contabilidad y Fiscalización.",
   lenguas: "Hola, quiero información sobre la Licenciatura en Lenguas Extranjeras.",
   centroIdiomas: "Hola, quiero información sobre el Centro de Idiomas UC.",
-  ingles: "Hola, quiero información sobre el Centro de Idiomas UC."
+  ingles: "Hola, quiero información sobre el Centro de Idiomas UC.",
+  derecho: "Hola, quiero información sobre la Licenciatura en Derecho.",
+  ingenieriaSistemas: "Hola, quiero información sobre la Ingeniería en Sistemas Computacionales con Enfoque en Negocios Digitales.",
+  maestriaAdministracionPublica: "Hola, quiero información sobre la Maestría en Administración Pública."
 } as const
 
 export function createWhatsAppLink(message: string = WHATSAPP_MESSAGES.general): string {

@@ -74,7 +74,7 @@ export function AdmissionsCTA() {
             {isSubmitted ? (
               <div className="bg-white rounded-3xl p-8 sm:p-10 shadow-xl shadow-[var(--color-wine)]/5 border border-[var(--color-wine)]/10 flex flex-col items-center text-center relative overflow-visible min-h-[400px] justify-center">
                 {/* Mascota en el estado enviado */}
-                <div className="mb-6 pointer-events-none">
+                <div className="mb-6 pointer-events-none mascot-float">
                   <Image
                     src="/images/brand/mascota-uc.webp"
                     alt="Mascota institucional de UC Universidad Continental"
@@ -130,7 +130,7 @@ export function AdmissionsCTA() {
                 </div>
 
                 {/* Mascota en el formulario */}
-                <div className="absolute -top-16 left-1/2 -translate-x-1/2 lg:left-auto lg:right-6 lg:-top-24 lg:translate-x-0 z-20 pointer-events-none">
+                <div className="absolute -top-16 left-1/2 -translate-x-1/2 lg:left-auto lg:right-6 lg:-top-24 lg:translate-x-0 z-20 pointer-events-none mascot-float">
                   <Image
                     src="/images/brand/mascota-uc.webp"
                     alt="Mascota institucional de UC Universidad Continental"

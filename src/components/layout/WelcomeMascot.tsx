@@ -106,22 +106,22 @@ export function WelcomeMascot() {
           animation: ${anim ?? "ucBgTitleIn 1200ms cubic-bezier(0.16,1,0.3,1) 100ms both"};
         }
 
-        /* ── Logo top-center ── */
+        /* ── Logo top-right ── */
         .ucw-logo-wrap {
-          position: relative;
+          position: absolute;
+          top: clamp(20px, 3.5vh, 36px);
+          right: clamp(20px, 3.5vw, 44px);
           z-index: 30;
-          margin-top: clamp(20px, 4vh, 36px);
-          width: clamp(80px, 9vw, 120px);
+          width: clamp(150px, 15vw, 240px);
           aspect-ratio: 3.6 / 1;
-          flex-shrink: 0;
           animation: ${anim ?? "ucFadeIn 600ms ease 200ms both"};
         }
 
-        /* ── Saltar — top right absolute ── */
+        /* ── Saltar — top left absolute ── */
         .ucw-skip {
           position: absolute;
           top: clamp(18px, 3.5vh, 32px);
-          right: clamp(20px, 3.5vw, 44px);
+          left: clamp(20px, 3.5vw, 44px);
           z-index: 30;
           font-size: clamp(10px, 0.9vw, 12px);
           font-weight: 700;
@@ -256,9 +256,11 @@ export function WelcomeMascot() {
           .ucw-logo-wrap {
             position: absolute !important;
             top: clamp(20px, 3.5vh, 36px) !important;
-            left: 50% !important;
-            transform: translateX(-50%) !important;
+            right: clamp(20px, 3.5vw, 44px) !important;
+            left: auto !important;
+            transform: none !important;
             margin-top: 0 !important;
+            width: clamp(180px, 18vw, 280px) !important;
           }
           .ucw-mascot {
             /* aspect-ratio 1:1 con altura dominante — Image fill necesita w+h explícitos */

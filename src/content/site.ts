@@ -5,7 +5,7 @@ export const siteConfig = {
   description: "Estudia en UC Universidad Continental en Tepic, Nayarit. Conoce nuestra oferta académica, modalidades flexibles, formación humanista y programas para impulsar tu futuro profesional.",
   mission: "Formar seres humanos con capacidades profesionales que generen conocimientos de excelencia académica para la resolución de problemáticas sociales, promoviendo el desarrollo sustentable comunitario, con actitud crítica y reflexiva, así como valores para la consolidación de una sociedad más justa, solidaria, humanista e inclusiva.",
   contact: {
-    phones: ["311 486 5734", "311 218 5570"],
+    phones: ["311 110 0640", "311 218 5570"],
     whatsapp: "311 110 0640",
     email: "uccontrolescolartepic@gmail.com",
   },
