@@ -51,10 +51,10 @@ export function StatsBlock() {
           </div>
 
           <AnimatedReveal direction="up" className="relative z-10">
-            <h2 className="text-xs font-bold uppercase tracking-widest text-[var(--color-magenta)] mb-4">
+            <h2 className="text-xs font-bold uppercase tracking-widest text-[var(--color-wine)] mb-4">
               Filosofía UC
             </h2>
-            <h3 className="text-4xl md:text-5xl lg:text-[3.5rem] font-black text-[var(--color-text)] tracking-tight leading-[1.1] text-balance mb-6">
+            <h3 className="text-4xl md:text-5xl lg:text-[3.5rem] font-black text-[var(--color-wine)] tracking-tight leading-[1.1] text-balance mb-6">
               Modelo Educativo Humanista
             </h3>
             <p className="text-lg text-[var(--color-text)]/70 text-balance leading-relaxed">
@@ -73,20 +73,20 @@ export function StatsBlock() {
                 direction="up" 
                 delay={0.1 * index}
               >
-                <div className="group relative flex flex-col sm:flex-row items-start gap-6 sm:gap-10 py-10 border-b border-[var(--color-muted)] transition-colors hover:border-b hover:border-[var(--color-magenta)]/30">
+                <div className="group relative flex flex-col sm:flex-row items-start gap-6 sm:gap-10 py-10 border-b border-[var(--color-muted)] transition-colors hover:border-b hover:border-[var(--color-wine)]/30">
                   
                   {/* Número Editorial */}
-                  <div className="text-4xl sm:text-5xl font-black text-[var(--color-muted)] group-hover:text-[var(--color-magenta)]/20 transition-colors">
+                  <div className="text-4xl sm:text-5xl font-black text-[var(--color-muted)] group-hover:text-[var(--color-wine)]/20 transition-colors">
                     {pillar.num}
                   </div>
 
                   {/* Contenido */}
                   <div className="flex-1 pt-1 sm:pt-2">
                     <div className="flex items-center gap-4 mb-3">
-                      <div className="bg-[var(--color-cream)] p-2.5 rounded-lg text-[var(--color-magenta)] group-hover:bg-[var(--color-magenta)] group-hover:text-white transition-colors">
+                      <div className="bg-[var(--color-cream)] p-2.5 rounded-lg text-[var(--color-wine)] group-hover:bg-[var(--color-wine)] group-hover:text-white transition-colors">
                         <Icon className="h-5 w-5" />
                       </div>
-                      <h4 className="text-2xl font-bold text-[var(--color-text)] group-hover:text-[var(--color-magenta)] transition-colors">
+                      <h4 className="text-2xl font-bold text-[var(--color-text)] group-hover:text-[var(--color-wine)] transition-colors">
                         {pillar.title}
                       </h4>
                     </div>
@@ -103,7 +103,7 @@ export function StatsBlock() {
           {/* Último elemento visual para cerrar la lista con elegancia */}
           <AnimatedReveal direction="up" delay={0.5}>
             <div className="pt-10 flex items-center gap-4 text-[var(--color-text)]/40 italic text-sm font-medium">
-              <div className="h-px w-12 bg-[var(--color-magenta)]" />
+              <div className="h-px w-12 bg-[var(--color-wine)]" />
               Educación para la humanidad
             </div>
           </AnimatedReveal>
