@@ -109,19 +109,29 @@ export function Header() {
               <div key={item.label} className="border-b border-[#EFEFEF]/50 last:border-none py-1">
                 {item.children ? (
                   <>
-                    <button
-                      type="button"
-                      className="flex w-full items-center justify-between py-2 text-base font-medium text-[var(--color-text)]"
-                      onClick={() => handleDropdownToggle(item.label)}
-                    >
-                      {item.label}
-                      <ChevronDown
-                        className={cn(
-                          "h-5 w-5 text-[var(--color-text)] transition-transform",
-                          activeDropdown === item.label && "rotate-180"
-                        )}
-                      />
-                    </button>
+                    <div className="flex w-full items-center justify-between py-2">
+                      <Link
+                        href={item.href}
+                        className="text-base font-medium text-[var(--color-text)] hover:text-[var(--color-red)]"
+                        onClick={closeMenu}
+                      >
+                        {item.label}
+                      </Link>
+                      <button
+                        type="button"
+                        className="p-2 text-[var(--color-text)] hover:bg-[var(--color-muted)] hover:text-[var(--color-red)] rounded-lg transition-colors cursor-pointer"
+                        onClick={() => handleDropdownToggle(item.label)}
+                        aria-expanded={activeDropdown === item.label}
+                        aria-label={`Abrir submenú de ${item.label}`}
+                      >
+                        <ChevronDown
+                          className={cn(
+                            "h-5 w-5 text-[var(--color-text)] transition-transform duration-200",
+                            activeDropdown === item.label && "rotate-180"
+                          )}
+                        />
+                      </button>
+                    </div>
                     {activeDropdown === item.label && (
                       <div className="mt-1 space-y-1 bg-[#F8F5F2] rounded-lg pl-4 pr-2 py-2 border border-[#EFEFEF]">
                         {item.children.map((child) => (

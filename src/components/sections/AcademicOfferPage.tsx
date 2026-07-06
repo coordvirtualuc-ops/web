@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useSearchParams } from "next/navigation"
 import Image from "next/image"
 import { 
   ArrowRight, 
@@ -28,6 +29,26 @@ import { AcademicProgram, academicPrograms, programCategories, getFeaturedProgra
 export function AcademicOfferPage() {
   const [selectedProgram, setSelectedProgram] = React.useState<AcademicProgram | null>(null)
   const [activeCategory, setActiveCategory] = React.useState<string>("Todas")
+
+  const searchParams = useSearchParams()
+
+  React.useEffect(() => {
+    const categoriaParam = searchParams.get("categoria")
+    if (categoriaParam) {
+      const decodedParam = decodeURIComponent(categoriaParam)
+      if (decodedParam === "Todas" || programCategories.includes(decodedParam as any)) {
+        setActiveCategory(decodedParam)
+        
+        // Desplazarse al catálogo
+        setTimeout(() => {
+          const element = document.getElementById("catalogo")
+          if (element) {
+            element.scrollIntoView({ behavior: "smooth" })
+          }
+        }, 150)
+      }
+    }
+  }, [searchParams])
 
   const totalPrograms = academicPrograms.length
   const totalCategories = programCategories.length
@@ -76,7 +97,7 @@ export function AcademicOfferPage() {
 
   const handleScrollToCatalog = (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>) => {
     e.preventDefault()
-    const element = document.getElementById("catalogo-programas")
+    const element = document.getElementById("catalogo")
     if (element) {
       element.scrollIntoView({ behavior: "smooth" })
     }
@@ -84,7 +105,7 @@ export function AcademicOfferPage() {
 
   const handleSelectCategoryAndScroll = (category: string) => {
     setActiveCategory(category)
-    const element = document.getElementById("catalogo-programas")
+    const element = document.getElementById("catalogo")
     if (element) {
       element.scrollIntoView({ behavior: "smooth" })
     }

@@ -36,7 +36,7 @@ export function ProgramCatalog({ activeCategory, setActiveCategory, onOpenDetail
   }, [activeCategory, searchQuery])
 
   return (
-    <section id="catalogo-programas" className="w-full py-16 sm:py-24 bg-[var(--color-cream)] scroll-mt-24">
+    <section id="catalogo" className="w-full py-16 sm:py-24 bg-[var(--color-cream)] scroll-mt-24">
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         
         {/* Cabecera del Catálogo */}

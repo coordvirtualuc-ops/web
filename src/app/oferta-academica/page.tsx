@@ -1,5 +1,6 @@
 import { Metadata } from "next"
 import { AcademicOfferPage } from "@/components/sections/AcademicOfferPage"
+import { Suspense } from "react"
 
 export const metadata: Metadata = {
   title: "Oferta Académica | UC Universidad Continental",
@@ -7,5 +8,9 @@ export const metadata: Metadata = {
 }
 
 export default function Page() {
-  return <AcademicOfferPage />
+  return (
+    <Suspense fallback={null}>
+      <AcademicOfferPage />
+    </Suspense>
+  )
 }
