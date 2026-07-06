@@ -6,7 +6,20 @@ export const AutoScrollCarousel = React.forwardRef<HTMLDivElement, { children: R
   ({ children, className = "" }, ref) => {
     const scrollRef = useRef<HTMLDivElement>(null)
 
-    React.useImperativeHandle(ref, () => scrollRef.current!)
+    React.useImperativeHandle(ref, () => {
+      const el = scrollRef.current!
+      if (el) {
+        ;(el as any).pauseAutoScroll = () => {
+          setIsPaused(true)
+          if (resumeTimeoutRef.current) clearTimeout(resumeTimeoutRef.current)
+        }
+        ;(el as any).resumeAutoScroll = () => {
+          if (resumeTimeoutRef.current) clearTimeout(resumeTimeoutRef.current)
+          resumeTimeoutRef.current = setTimeout(() => setIsPaused(false), 3000)
+        }
+      }
+      return el
+    })
   const [isPaused, setIsPaused] = useState(false)
   const [isDragging, setIsDragging] = useState(false)
   
@@ -114,6 +127,7 @@ export const AutoScrollCarousel = React.forwardRef<HTMLDivElement, { children: R
       onMouseMove={onMouseMove}
       onMouseUp={onMouseUp}
       onMouseLeave={onMouseLeave}
+      onMouseEnter={pause}
       onClickCapture={onClickCapture}
       onTouchStart={pause}
       onTouchEnd={resumeLater}

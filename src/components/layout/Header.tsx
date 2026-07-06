@@ -42,7 +42,7 @@ export function Header() {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center gap-6">
+        <nav className="hidden xl:flex items-center gap-4 xl:gap-5">
           {navigationItems.map((item) => (
             <div
               key={item.label}
@@ -53,10 +53,8 @@ export function Header() {
               <Link
                 href={item.href}
                 className={cn(
-                  "flex items-center gap-1 text-sm font-medium text-[var(--color-text)] transition-colors hover:text-[var(--color-red)]",
-                  item.children && "cursor-default"
+                  "flex items-center gap-1 text-sm font-medium text-[var(--color-text)] transition-colors hover:text-[var(--color-red)]"
                 )}
-                onClick={(e) => item.children && e.preventDefault()}
               >
                 {item.label}
                 {item.children && <ChevronDown className="h-4 w-4 transition-transform group-hover:rotate-180" />}
@@ -82,7 +80,7 @@ export function Header() {
         </nav>
 
         {/* Desktop CTA */}
-        <div className="hidden lg:flex items-center gap-3">
+        <div className="hidden xl:flex items-center gap-3">
           <Button href={createWhatsAppLink(WHATSAPP_MESSAGES.ucVirtual)} target="_blank" rel="noopener noreferrer" variant="outline" size="sm" className="shadow-sm">
             UC Virtual
           </Button>
@@ -94,7 +92,7 @@ export function Header() {
         {/* Mobile Hamburger Button */}
         <button
           type="button"
-          className="inline-flex items-center justify-center rounded-md p-2 text-[var(--color-text)] hover:bg-[var(--color-muted)] hover:text-[var(--color-red)] lg:hidden focus:outline-none"
+          className="inline-flex items-center justify-center rounded-md p-2 text-[var(--color-text)] hover:bg-[var(--color-muted)] hover:text-[var(--color-red)] xl:hidden focus:outline-none"
           onClick={toggleMenu}
           aria-expanded={isOpen}
           aria-label="Toggle menu"
@@ -105,7 +103,7 @@ export function Header() {
 
       {/* Mobile Menu Panel */}
       {isOpen && (
-        <div className="border-b border-[#EFEFEF] bg-white lg:hidden animate-in fade-in slide-in-from-top-2 duration-200 shadow-xl absolute w-full left-0">
+        <div className="border-b border-[#EFEFEF] bg-white xl:hidden animate-in fade-in slide-in-from-top-2 duration-200 shadow-xl absolute w-full left-0">
           <div className="space-y-1 px-4 pb-6 pt-3 sm:px-6">
             {navigationItems.map((item) => (
               <div key={item.label} className="border-b border-[#EFEFEF]/50 last:border-none py-1">

@@ -6,6 +6,9 @@ import { Button } from "@/components/ui/Button"
 import { siteConfig } from "@/content/site"
 import { createWhatsAppLink } from "@/lib/whatsapp"
 
+export const MAP_IFRAME_SRC = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3712.00239653841!2d-104.90338052473012!3d21.50762608026421!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x842736fbd481de53%3A0x3f4ec8e5498aa832!2sUC%20Universidad%20Continental!5e0!3m2!1ses-419!2smx!4v1782506720515!5m2!1ses-419!2smx"
+export const MAP_GOOGLE_MAPS_LINK = "https://maps.google.com/?q=UC+Universidad+Continental+Calle+Oaxaca+220+Col+Centro+Tepic+Nayarit"
+
 export function ContactMapSection() {
   const whatsappUrl = createWhatsAppLink()
 
@@ -94,7 +97,7 @@ export function ContactMapSection() {
               
               <div className="pt-4">
                 <Button 
-                  href="https://maps.google.com/?q=UC+Universidad+Continental+Calle+Oaxaca+220+Col+Centro+Tepic+Nayarit" 
+                  href={MAP_GOOGLE_MAPS_LINK} 
                   target="_blank" 
                   rel="noopener noreferrer" 
                   variant="outline" 
@@ -112,7 +115,7 @@ export function ContactMapSection() {
             <AnimatedReveal direction="left" delay={0.2} className="w-full h-full">
               <div className="w-full h-full rounded-[2rem] overflow-hidden shadow-xl border border-[var(--color-wine)]/10 bg-[var(--color-cream)]">
                 <iframe 
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3712.00239653841!2d-104.90338052473012!3d21.50762608026421!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x842736fbd481de53%3A0x3f4ec8e5498aa832!2sUC%20Universidad%20Continental!5e0!3m2!1ses-419!2smx!4v1782506720515!5m2!1ses-419!2smx" 
+                  src={MAP_IFRAME_SRC} 
                   width="100%" 
                   height="100%" 
                   style={{ border: 0 }} 

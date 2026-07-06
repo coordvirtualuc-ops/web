@@ -21,13 +21,13 @@ export function StatsBlock() {
     {
       num: "03",
       title: "Docentes y programas actualizados",
-      desc: "Nuestros profesores altamente capacitados cuentan con experiencia activa, y nuestros programas son innovadores y actualizados para responder a las necesidades reales.",
+      desc: "Nuestros docentes altamente capacitados cuentan con experiencia activa, y nuestros programas son innovadores y actualizados para responder a las necesidades reales.",
       icon: BookOpen,
     },
     {
       num: "04",
       title: "Modalidades flexibles",
-      desc: "Formatos y horarios diseñados para adaptarse a tu estilo de vida, permitiéndote trabajar y estudiar de manera equilibrada.",
+      desc: "Modalidades y horarios diseñados para adaptarse a tu estilo de vida, permitiéndote trabajar y estudiar de manera equilibrada.",
       icon: Clock,
     },
   ]

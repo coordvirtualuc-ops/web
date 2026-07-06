@@ -15,11 +15,22 @@ export function HeroHome() {
   const scrollCarousel = (direction: "left" | "right") => {
     const container = carouselRef.current
     if (!container) return
+
+    // Pausar el auto-scroll para que no interrumpa el desplazamiento smooth
+    if (typeof (container as any).pauseAutoScroll === "function") {
+      ;(container as any).pauseAutoScroll()
+    }
+
     const scrollAmount = 340
     container.scrollBy({
       left: direction === "left" ? -scrollAmount : scrollAmount,
       behavior: "smooth"
     })
+
+    // Reanudar el auto-scroll tras un retraso
+    if (typeof (container as any).resumeAutoScroll === "function") {
+      ;(container as any).resumeAutoScroll()
+    }
   }
 
   // Array adaptado con las rutas de las imágenes tipo "póster vertical"
@@ -29,9 +40,9 @@ export function HeroHome() {
     { title: "Criminología y Criminalística", wp: WHATSAPP_MESSAGES.criminologia, image: "/images/poster-criminologia.webp" },
     { title: "Contabilidad y Fiscalización", wp: WHATSAPP_MESSAGES.contabilidad, image: "/images/poster-contabilidad.webp" },
     { title: "Lenguas Extranjeras", wp: WHATSAPP_MESSAGES.lenguas, image: "/images/poster-lenguas.webp" },
-    { title: "Licenciatura en Derecho", wp: WHATSAPP_MESSAGES.derecho, image: "/images/programas/derecho.webp" },
-    { title: "Ingeniería en Sistemas Computacionales con Enfoque en Negocios Digitales", wp: WHATSAPP_MESSAGES.ingenieriaSistemas, image: "/images/programas/ingenieria-sistemas-negocios-digitales.webp" },
-    { title: "Maestría en Administración Pública", wp: WHATSAPP_MESSAGES.maestriaAdministracionPublica, image: "/images/programas/maestria-administracion-publica.webp" },
+    { title: "Licenciatura en Derecho", wp: WHATSAPP_MESSAGES.derecho, image: "/images/poster-derecho.webp" },
+    { title: "Ingeniería en Sistemas Computacionales con Enfoque en Negocios Digitales", wp: WHATSAPP_MESSAGES.ingenieriaSistemas, image: "/images/poster-sistemas.webp" },
+    { title: "Maestría en Administración Pública", wp: WHATSAPP_MESSAGES.maestriaAdministracionPublica, image: "/images/poster-maestria-administracion-publica.webp" },
   ]
 
   const valuePropositions = [
