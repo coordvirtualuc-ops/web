@@ -10,13 +10,13 @@ export const siteConfig = {
     email: "uccontrolescolartepic@gmail.com",
   },
   address: {
-    street: "Calle Oaxaca #220",
+    street: "Calle Oaxaca Sur #220",
     neighborhood: "Col. Centro",
     city: "Tepic",
     state: "Nayarit",
     country: "México",
     reference: "Entre Insurgentes y Herrera",
-    fullAddress: "Calle Oaxaca #220 Col. Centro, Tepic, Nayarit",
+    fullAddress: "Calle Oaxaca Sur #220 Col. Centro, Tepic, Nayarit",
   },
   schedule: {
     weekdays: "Lunes a viernes de 9:00 a.m. a 8:00 p.m.",

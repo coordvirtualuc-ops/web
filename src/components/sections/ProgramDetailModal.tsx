@@ -174,8 +174,25 @@ export function ProgramDetailModal({ program, isOpen, onClose }: ProgramDetailMo
                 </ul>
               </div>
             )}
+            {/* 3. Perfil Recomendado */}
+            {program.profile && program.profile.length > 0 && isConfirmedArray(program.profile) && (
+              <div className="space-y-3">
+                <h3 className="text-xs font-black uppercase tracking-widest text-[var(--color-red)] flex items-center gap-2">
+                  <GraduationCap className="h-4.5 w-4.5 text-[var(--color-wine)] shrink-0" />
+                  Perfil recomendado
+                </h3>
+                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {program.profile.map((prof, idx) => (
+                    <li key={idx} className="flex items-start gap-2.5 text-xs text-[var(--color-text)]/80 leading-relaxed font-sans">
+                      <CheckCircle className="h-4 w-4 text-[var(--color-red)] shrink-0 mt-0.5" />
+                      <span>{prof}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
 
-            {/* 3. Campo Laboral */}
+            {/* 4. Campo Laboral */}
             {program.careerField && program.careerField.length > 0 && (
               <div className="space-y-3">
                 <h3 className="text-xs font-black uppercase tracking-widest text-[var(--color-red)] flex items-center gap-2">

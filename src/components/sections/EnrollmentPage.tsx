@@ -12,7 +12,9 @@ import {
   User,
   BookOpen,
   CheckCircle2,
-  AlertCircle
+  AlertCircle,
+  Clock,
+  Calendar
 } from "lucide-react"
 import { Button } from "@/components/ui/Button"
 import { createWhatsAppLink } from "@/lib/whatsapp"
@@ -27,6 +29,8 @@ export function EnrollmentPage() {
   const [telefono, setTelefono] = React.useState("")
   const [programa, setPrograma] = React.useState("")
   const [modalidad, setModalidad] = React.useState("")
+  const [fecha, setFecha] = React.useState("")
+  const [hora, setHora] = React.useState("")
   const [comentario, setComentario] = React.useState("")
   const [errors, setErrors] = React.useState<Record<string, string>>({})
 
@@ -65,6 +69,36 @@ export function EnrollmentPage() {
 
     if (step === 3) {
       if (!modalidad) newErrors.modalidad = "Selecciona una modalidad"
+      if (!fecha) {
+        newErrors.fecha = "Selecciona una fecha"
+      } else {
+        const [year, month, dayVal] = fecha.split('-').map(Number)
+        const dateObj = new Date(year, month - 1, dayVal)
+        if (dateObj.getDay() === 0) {
+          newErrors.fecha = "Los domingos no hay atención disponible."
+        }
+      }
+      if (!hora) {
+        newErrors.hora = "Selecciona una hora"
+      } else if (fecha) {
+        const [year, month, dayVal] = fecha.split('-').map(Number)
+        const dateObj = new Date(year, month - 1, dayVal)
+        const isSaturday = dateObj.getDay() === 6
+        const isSunday = dateObj.getDay() === 0
+        if (isSunday) {
+          newErrors.hora = "No disponible en domingo."
+        } else if (isSaturday) {
+          const validSatHours = ["08:00 AM", "09:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "01:00 PM", "02:00 PM", "03:00 PM", "04:00 PM"]
+          if (!validSatHours.includes(hora)) {
+            newErrors.hora = "Hora inválida para sábado (8:00 AM - 4:00 PM)."
+          }
+        } else {
+          const validWeekdayHours = ["09:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "01:00 PM", "02:00 PM", "03:00 PM", "04:00 PM", "05:00 PM", "06:00 PM", "07:00 PM", "08:00 PM"]
+          if (!validWeekdayHours.includes(hora)) {
+            newErrors.hora = "Hora inválida para días hábiles (9:00 AM - 8:00 PM)."
+          }
+        }
+      }
     }
 
     setErrors(newErrors)
@@ -84,12 +118,14 @@ export function EnrollmentPage() {
   const handleSubmit = () => {
     const commentText = comentario.trim() ? comentario.trim() : "Ninguno."
 
-    const message = `Hola, quiero iniciar mi proceso de inscripción en UC Universidad Continental.
+    const message = `Hola, quiero agendar una cita para inscribirme en UC Universidad Continental.
 
 Nombre: ${nombre.trim()}
-Teléfono: ${telefono.trim()}
+WhatsApp: ${telefono.trim()}
 Programa de interés: ${programa}
 Modalidad de interés: ${modalidad}
+Fecha de cita: ${fecha}
+Hora de cita: ${hora}
 Comentario: ${commentText}`
 
     const whatsappUrl = createWhatsAppLink(message)
@@ -97,40 +133,45 @@ Comentario: ${commentText}`
   }
 
   const requirements = [
-    "Acta de nacimiento",
-    "CURP",
-    "Certificado de estudios previos",
-    "Comprobante de domicilio",
-    "Identificación oficial",
-    "Fotografías",
-    "Solicitud de inscripción",
+    "Acta de nacimiento.",
+    "CURP.",
+    "Certificado de estudios previos (tendrás una prórroga de tres meses para entrega).",
+    "Comprobante de domicilio.",
+    "Solicitud de inscripción (la proporciona la universidad).",
   ]
 
   const faqs = [
     {
-      q: "¿Este formulario me inscribe automáticamente?",
-      a: "No. Es una solicitud de orientación para que admisiones pueda guiarte paso a paso.",
+      q: "¿Cuándo inician clases?",
+      a: "Tenemos dos periodos de ingreso cada año, en enero y septiembre. Para conocer la fecha exacta, deberás consultar con un asesor educativo vía WhatsApp o llamada telefónica.",
     },
     {
-      q: "¿Puedo pedir información si aún no elijo programa?",
-      a: "Sí. Te ayudamos a revisar opciones y perfiles.",
+      q: "¿Qué modalidades ofrecen?",
+      a: "Ofrecemos modalidades escolarizadas y mixtas, las cuales se dividen en horarios matutino, nocturno, sabatino, viernes y asincrónico. Pregunta por el de tu preferencia vía WhatsApp o llamada telefónica.",
     },
     {
-      q: "¿Me responderán por WhatsApp?",
-      a: "Sí. El mensaje se enviará directamente al área de admisiones.",
+      q: "¿Cuánto dura un programa académico?",
+      a: "Licenciaturas e ingenierías: 3 años. Bachillerato y maestrías: 2 años. Diplomados y niveles de idioma: 3 meses.",
     },
     {
-      q: "¿Los requisitos cambian por programa?",
-      a: "Sí, pueden variar según nivel académico y modalidad. Admisiones te confirmará los exactos.",
+      q: "¿Los programas cuentan con validez oficial?",
+      a: "Así es, podrás consultarlo directamente en nuestra página web o preguntarle a un asesor educativo vía WhatsApp o llamada telefónica.",
+    },
+    {
+      q: "¿Puedo estudiar si trabajo?",
+      a: "Claro que sí, tenemos la modalidad asincrónica, la cual no requiere horario, y también contamos con horarios presenciales los días sábados o viernes.",
+    },
+    {
+      q: "¿Cómo obtengo más información?",
+      a: "Puedes consultar tus dudas personales vía WhatsApp o mediante llamada telefónica.",
+    },
+    {
+      q: "¿Qué formas de pago aceptan?",
+      a: "Aceptamos efectivo, terminal bancaria, transferencia y depósito bancario. Consulta con un asesor educativo vía WhatsApp o llamada telefónica para mayor información.",
     },
   ]
 
   const trustBlocks = [
-    {
-      title: "Sin compromiso",
-      desc: "Recibe orientación antes de tomar una decisión.",
-      icon: CheckCircle
-    },
     {
       title: "Atención personalizada",
       desc: "Admisiones te ayuda a resolver dudas sobre programa, modalidad y requisitos.",
@@ -140,6 +181,11 @@ Comentario: ${commentText}`
       title: "Proceso claro",
       desc: "Te indicaremos los pasos y documentos necesarios según tu programa.",
       icon: FileText
+    },
+    {
+      title: "Sin compromiso",
+      desc: "Recibe orientación antes de tomar una decisión.",
+      icon: CheckCircle
     }
   ]
 
@@ -164,41 +210,42 @@ Comentario: ${commentText}`
               </AnimatedReveal>
 
               <AnimatedReveal direction="up" delay={0.2}>
-                <h1 className="text-4xl font-black tracking-tight text-[var(--color-wine)] sm:text-5xl md:text-6xl lg:text-[4rem] leading-[1.05] mb-6 text-balance drop-shadow-sm">
+                <h1 className="text-4xl font-black tracking-tight text-[var(--color-wine)] sm:text-5xl md:text-6xl lg:text-[4rem] leading-[1.05] mb-6 text-balance drop-shadow-sm uppercase">
                   Inscríbete en <span className="text-[var(--color-red)]">UC</span>
                 </h1>
               </AnimatedReveal>
 
               <AnimatedReveal direction="up" delay={0.3}>
-                <p className="text-lg sm:text-xl text-[var(--color-text)] md:text-2xl leading-relaxed mb-4 text-balance max-w-xl font-medium">
-                  Te guiamos paso a paso para iniciar tu proceso de admisión y elegir el programa adecuado para ti.
-                </p>
-                <p className="text-sm sm:text-base text-[var(--color-text)]/70 mb-10 text-balance max-w-lg font-medium">
-                  Completa tus datos y el área de admisiones te orientará por WhatsApp.
-                </p>
+                <div className="space-y-4 mb-8">
+                  <h2 className="text-xl sm:text-2xl font-bold text-[var(--color-wine)] uppercase">
+                    Elige cómo quieres iniciar tu inscripción
+                  </h2>
+                  <p className="text-base text-[var(--color-text)] leading-relaxed text-balance max-w-xl font-medium">
+                    Puedes comenzar tu inscripción en línea o agendar una visita para recibir orientación en nuestras instalaciones.
+                  </p>
+                </div>
               </AnimatedReveal>
 
               <AnimatedReveal direction="up" delay={0.4} className="w-full">
                 <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto">
                   <Button
-                    onClick={handleScrollToForm}
-                    variant="primary"
-                    size="lg"
-                    className="group text-base px-8 shadow-xl shadow-[var(--color-red)]/20 bg-[var(--color-red)] text-white hover:bg-[var(--color-wine)] h-14 rounded-2xl cursor-pointer transition-all duration-300 w-full sm:w-auto"
-                  >
-                    Iniciar mi solicitud
-                    <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-                  </Button>
-                  <Button
-                    href={whatsappGeneralUrl}
+                    href="https://c1-uct.algebraix.com/bin/g/enrollments/default/"
                     target="_blank"
                     rel="noopener noreferrer"
+                    variant="primary"
+                    size="lg"
+                    className="group text-base px-8 shadow-xl shadow-[var(--color-red)]/20 bg-[var(--color-red)] text-white hover:bg-[var(--color-wine)] h-14 rounded-2xl cursor-pointer transition-all duration-300 w-full sm:w-auto font-bold flex items-center justify-center gap-2"
+                  >
+                    Quiero inscribirme en línea
+                    <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+                  </Button>
+                  <Button
+                    onClick={handleScrollToForm}
                     variant="outline"
                     size="lg"
-                    className="border-[var(--color-wine)]/20 text-[var(--color-wine)] hover:bg-[var(--color-wine)] hover:text-white backdrop-blur-md h-14 rounded-2xl cursor-pointer w-full sm:w-auto"
+                    className="border-[var(--color-wine)]/30 text-[var(--color-wine)] hover:bg-[var(--color-wine)] hover:text-white backdrop-blur-md h-14 rounded-2xl cursor-pointer w-full sm:w-auto font-bold flex items-center justify-center"
                   >
-                    <MessageCircle className="mr-2 h-5 w-5" />
-                    Hablar con admisiones
+                    Quiero ir a inscribirme
                   </Button>
                 </div>
               </AnimatedReveal>
@@ -233,7 +280,7 @@ Comentario: ${commentText}`
                 <div className="absolute -bottom-4 right-4 w-40 h-40 md:w-56 md:h-56 z-30 mascot-float pointer-events-none select-none">
                   <Image
                     src="/images/brand/mascota-uc.webp"
-                    alt="Mascota UC Guía"
+                    alt="Nayo - Guardián del Conocimiento"
                     fill
                     className="object-contain drop-shadow-xl"
                     sizes="224px"
@@ -250,10 +297,10 @@ Comentario: ${commentText}`
       <Section id="proceso" background="light" padding="sm" className="border-t border-[var(--color-wine)]/5 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
           <AnimatedReveal direction="up">
-            <h2 className="text-2xl sm:text-3xl font-black text-[var(--color-wine)] mb-3 tracking-tight">
+            <h2 className="text-2xl sm:text-3xl font-black text-[var(--color-wine)] mb-3 tracking-tight uppercase">
               Tu proceso en 3 pasos
             </h2>
-            <p className="text-sm sm:text-base text-[var(--color-text)]/70 mb-10 max-w-xl mx-auto">
+            <p className="text-sm sm:text-base text-[var(--color-text)]/70 mb-10 max-w-xl mx-auto font-sans">
               Este formulario no te compromete. Nos ayuda a orientarte mejor.
             </p>
           </AnimatedReveal>
@@ -271,7 +318,7 @@ Comentario: ${commentText}`
                   <div className="w-14 h-14 rounded-2xl bg-white border border-[var(--color-wine)]/10 shadow-sm flex items-center justify-center text-[var(--color-red)] mb-4 group-hover:scale-110 group-hover:border-[var(--color-red)] transition-all duration-300">
                     <s.icon className="w-6 h-6" />
                   </div>
-                  <h3 className="text-sm sm:text-base font-bold text-[var(--color-text)] text-center group-hover:text-[var(--color-wine)] transition-colors">
+                  <h3 className="text-sm sm:text-base font-bold text-[var(--color-text)] text-center group-hover:text-[var(--color-wine)] transition-colors uppercase">
                     {s.step}. {s.title}
                   </h3>
                 </div>
@@ -281,87 +328,126 @@ Comentario: ${commentText}`
         </div>
       </Section>
 
-      {/* 3 & 4. FORMULARIO GUIADO PASO A PASO COMO BLOQUE PRINCIPAL */}
+      {/* 3 & 4. FORMULARIO GUIADO PASO A PASO */}
       <Section id="formulario-admision" background="wine" padding="lg" className="relative overflow-hidden">
         {/* Decoración de fondo */}
         <div className="absolute top-0 right-0 w-96 h-96 bg-[var(--color-red)]/10 rounded-full blur-[100px] pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-[var(--color-red)]/5 rounded-full blur-[100px] pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-start relative z-10">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
           
-          {/* Header Izquierdo */}
-          <div className="lg:col-span-5 text-white">
+          {/* Columna Izquierda: Beneficios e Información */}
+          <div className="lg:col-span-5 text-white space-y-8">
             <AnimatedReveal direction="right">
               <span className="text-xs font-bold uppercase tracking-widest text-[var(--color-cream)]/70">
-                Paso a Paso
+                Inscripciones Abiertas
               </span>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black mt-3 mb-6 tracking-tight text-balance leading-tight drop-shadow-sm">
-                Comienza tu solicitud
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black mt-3 mb-6 tracking-tight text-balance leading-tight drop-shadow-sm uppercase">
+                Agenda tu cita de inscripción
               </h2>
               <p className="text-base sm:text-lg text-[var(--color-cream)]/90 leading-relaxed font-sans mb-6 text-balance">
-                Completa estos datos y el equipo de admisiones te orientará sobre requisitos, modalidad y siguientes pasos.
+                Déjanos tus datos y elige el programa de interés para que admisiones pueda atenderte en nuestras instalaciones.
               </p>
-              <div className="p-4 bg-white/5 border border-white/10 rounded-2xl backdrop-blur-sm inline-flex">
-                <p className="text-xs sm:text-sm text-[var(--color-cream)] font-medium flex gap-3">
-                  <AlertCircle className="w-5 h-5 text-[var(--color-red)] shrink-0" />
+              <div className="p-5 bg-white/5 border border-white/10 rounded-2xl backdrop-blur-sm inline-flex">
+                <p className="text-xs sm:text-sm text-[var(--color-cream)] font-semibold flex gap-3">
+                  <AlertCircle className="w-5 h-5 text-[var(--color-red)] shrink-0 mt-0.5" />
                   Esta solicitud es informativa y no representa una inscripción definitiva.
                 </p>
               </div>
 
               {/* Bloques de Confianza */}
-              <div className="mt-12 space-y-4">
+              <div className="mt-8 space-y-4">
                 {trustBlocks.map((tb, idx) => (
                   <div key={idx} className="flex gap-4 items-start p-4 bg-white/5 rounded-2xl hover:bg-white/10 transition-colors">
                     <div className="w-10 h-10 rounded-xl bg-white text-[var(--color-red)] flex items-center justify-center shrink-0">
                       <tb.icon className="w-5 h-5" />
                     </div>
                     <div>
-                      <h4 className="text-sm sm:text-base font-bold text-white mb-1">{tb.title}</h4>
-                      <p className="text-xs sm:text-sm text-[var(--color-cream)]/70 leading-relaxed">{tb.desc}</p>
+                      <h4 className="text-sm sm:text-base font-bold text-white mb-1 uppercase">{tb.title}</h4>
+                      <p className="text-xs sm:text-sm text-[var(--color-cream)]/70 leading-relaxed font-sans">{tb.desc}</p>
                     </div>
                   </div>
                 ))}
               </div>
             </AnimatedReveal>
+
+            {/* Nayo en Columna Izquierda (Desktop) */}
+            <div className="hidden lg:block pt-4 select-none">
+              <AnimatedReveal direction="up" className="relative w-48 h-48 mascot-float">
+                <Image
+                  src="/images/brand/mascota-uc.webp"
+                  alt="Nayo - Guardián del Conocimiento"
+                  fill
+                  className="object-contain drop-shadow-2xl"
+                  sizes="192px"
+                />
+              </AnimatedReveal>
+            </div>
           </div>
 
-          {/* Formulario Multi-step */}
+          {/* Columna Derecha: Formulario Step-by-Step */}
           <div className="lg:col-span-7 w-full relative">
+            
+            {/* Nayo te acompaña (Burbuja Dinámica Responsiva) */}
+            <AnimatedReveal direction="up" className="flex items-center gap-4 bg-white/10 backdrop-blur-md border border-white/20 p-4 rounded-2xl mb-6 max-w-lg mx-auto">
+              <div className="relative w-12 h-12 shrink-0 mascot-float select-none">
+                <Image
+                  src="/images/brand/mascota-uc.webp"
+                  alt="Nayo"
+                  fill
+                  className="object-contain drop-shadow-md"
+                  sizes="48px"
+                />
+              </div>
+              <div className="text-left text-white">
+                <p className="text-[10px] font-bold uppercase tracking-wider text-[var(--color-cream)]">Nayo te acompaña</p>
+                <p className="text-xs sm:text-sm font-semibold leading-snug font-sans">
+                  {currentStep === 1 && "“Empecemos con tus datos personales.”"}
+                  {currentStep === 2 && "“Elige el programa que más te interesa estudiar.”"}
+                  {currentStep === 3 && "“Ahora agenda cuándo quieres visitarnos.”"}
+                  {currentStep === 4 && "“Todo listo para enviar tu solicitud a admisiones.”"}
+                </p>
+              </div>
+            </AnimatedReveal>
+
+            {/* Tarjeta de Formulario Principal */}
             <AnimatedReveal direction="left" delay={0.2} className="relative z-10 bg-white rounded-[2rem] shadow-2xl p-6 sm:p-8 md:p-10 border border-[var(--color-wine)]/5">
               
-              {/* Progreso Visual */}
-              <div className="flex items-center justify-between mb-8 relative">
-                <div className="absolute left-0 top-1/2 -translate-y-1/2 w-full h-1 bg-[var(--color-cream)] z-0 rounded-full" />
-                <div 
-                  className="absolute left-0 top-1/2 -translate-y-1/2 h-1 bg-[var(--color-red)] z-0 rounded-full transition-all duration-500 ease-in-out" 
-                  style={{ width: `${((currentStep - 1) / 3) * 100}%` }}
-                />
-                {[1, 2, 3, 4].map(stepNum => (
-                  <div 
-                    key={stepNum} 
-                    className={`relative z-10 w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold border-2 transition-colors duration-300
-                      ${currentStep > stepNum 
-                        ? "bg-[var(--color-red)] border-[var(--color-red)] text-white" 
-                        : currentStep === stepNum 
-                          ? "bg-white border-[var(--color-red)] text-[var(--color-red)]" 
-                          : "bg-white border-[var(--color-cream)] text-[var(--color-text)]/40"
+              {/* Progreso Visual con dots y texto */}
+              <div className="flex flex-col gap-4 mb-8">
+                <div className="flex items-center justify-between text-xs font-bold uppercase tracking-wider text-slate-500">
+                  <span>Paso {currentStep} de 4</span>
+                  <span className="text-[var(--color-red)]">
+                    {currentStep === 1 && "Datos Personales"}
+                    {currentStep === 2 && "Programa de Interés"}
+                    {currentStep === 3 && "Agenda tu Visita"}
+                    {currentStep === 4 && "Confirmación"}
+                  </span>
+                </div>
+                <div className="flex items-center gap-2">
+                  {[1, 2, 3, 4].map(stepNum => (
+                    <div 
+                      key={stepNum} 
+                      className={`h-2 flex-grow rounded-full transition-all duration-500 ${
+                        currentStep >= stepNum 
+                          ? "bg-[var(--color-red)]" 
+                          : "bg-slate-100"
                       }`}
-                  >
-                    {currentStep > stepNum ? <CheckCircle2 className="w-4 h-4" /> : stepNum}
-                  </div>
-                ))}
+                    />
+                  ))}
+                </div>
               </div>
 
               {/* Paso 1: Datos Personales */}
               {currentStep === 1 && (
                 <div className="space-y-6 animate-fade-in">
-                  <div className="text-center mb-6">
-                    <h3 className="text-xl sm:text-2xl font-black text-[var(--color-wine)]">Datos personales</h3>
-                    <p className="text-xs sm:text-sm text-[var(--color-text)]/60 mt-1">¿Cómo te llamamos y dónde te contactamos?</p>
+                  <div>
+                    <h3 className="text-xl sm:text-2xl font-black text-slate-800 uppercase">Cuéntanos quién eres</h3>
+                    <p className="text-xs sm:text-sm text-slate-500 mt-1 font-sans">Necesitamos tus datos para que admisiones pueda contactarte.</p>
                   </div>
                   <div className="space-y-4">
                     <div className="flex flex-col gap-1.5">
-                      <label htmlFor="nombre" className="text-xs uppercase font-bold text-[var(--color-text)]/70 tracking-wider">
+                      <label htmlFor="nombre" className="text-xs uppercase font-bold text-slate-700 tracking-wider">
                         Nombre Completo *
                       </label>
                       <input
@@ -370,16 +456,17 @@ Comentario: ${commentText}`
                         value={nombre}
                         onChange={(e) => setNombre(e.target.value)}
                         placeholder="Ej. Juan Pérez López"
-                        className={`w-full h-12 px-4 text-sm bg-[var(--color-cream)]/30 border rounded-xl focus:outline-none focus:ring-2 transition-all ${
+                        className={`w-full h-14 px-4 text-sm bg-white border rounded-xl focus:outline-none focus:ring-2 transition-all text-slate-800 placeholder-slate-400 ${
                           errors.nombre
                             ? "border-red-500 focus:ring-red-200"
-                            : "border-[var(--color-wine)]/10 focus:ring-[var(--color-red)]/20 focus:border-[var(--color-red)]"
+                            : "border-[var(--color-wine)]/20 focus:ring-[var(--color-red)]/20 focus:border-[var(--color-red)]"
                         }`}
                       />
-                      {errors.nombre && <span className="text-xs text-red-500 font-medium">{errors.nombre}</span>}
+                      {errors.nombre && <span className="text-xs text-red-500 font-semibold">{errors.nombre}</span>}
                     </div>
+                    
                     <div className="flex flex-col gap-1.5">
-                      <label htmlFor="telefono" className="text-xs uppercase font-bold text-[var(--color-text)]/70 tracking-wider">
+                      <label htmlFor="telefono" className="text-xs uppercase font-bold text-slate-700 tracking-wider">
                         WhatsApp o Celular *
                       </label>
                       <input
@@ -387,14 +474,14 @@ Comentario: ${commentText}`
                         type="tel"
                         value={telefono}
                         onChange={(e) => setTelefono(e.target.value)}
-                        placeholder="10 dígitos"
-                        className={`w-full h-12 px-4 text-sm bg-[var(--color-cream)]/30 border rounded-xl focus:outline-none focus:ring-2 transition-all ${
+                        placeholder="Ej. 3111234567"
+                        className={`w-full h-14 px-4 text-sm bg-white border rounded-xl focus:outline-none focus:ring-2 transition-all text-slate-800 placeholder-slate-400 ${
                           errors.telefono
                             ? "border-red-500 focus:ring-red-200"
-                            : "border-[var(--color-wine)]/10 focus:ring-[var(--color-red)]/20 focus:border-[var(--color-red)]"
+                            : "border-[var(--color-wine)]/20 focus:ring-[var(--color-red)]/20 focus:border-[var(--color-red)]"
                         }`}
                       />
-                      {errors.telefono && <span className="text-xs text-red-500 font-medium">{errors.telefono}</span>}
+                      {errors.telefono && <span className="text-xs text-red-500 font-semibold">{errors.telefono}</span>}
                     </div>
                   </div>
                 </div>
@@ -403,69 +490,151 @@ Comentario: ${commentText}`
               {/* Paso 2: Programa de Interés */}
               {currentStep === 2 && (
                 <div className="space-y-6 animate-fade-in">
-                  <div className="text-center mb-6">
-                    <h3 className="text-xl sm:text-2xl font-black text-[var(--color-wine)]">Programa de interés</h3>
-                    <p className="text-xs sm:text-sm text-[var(--color-text)]/60 mt-1">¿Qué te gustaría estudiar con nosotros?</p>
+                  <div>
+                    <h3 className="text-xl sm:text-2xl font-black text-slate-800 uppercase">Elige la carrera o programa que te interesa</h3>
+                    <p className="text-xs sm:text-sm text-slate-500 mt-1 font-sans">No te preocupes si aún no estás seguro; podemos orientarte.</p>
                   </div>
                   <div className="space-y-4">
                     <div className="flex flex-col gap-1.5">
+                      <label htmlFor="programa" className="text-xs uppercase font-bold text-slate-700 tracking-wider">
+                        Carrera / Posgrado de Interés *
+                      </label>
                       <div className="relative">
                         <select
+                          id="programa"
                           value={programa}
                           onChange={(e) => setPrograma(e.target.value)}
-                          className={`w-full h-12 pl-4 pr-10 text-sm bg-[var(--color-cream)]/30 border rounded-xl focus:outline-none focus:ring-2 transition-all appearance-none cursor-pointer ${
+                          className={`w-full h-14 pl-4 pr-10 text-sm bg-white border rounded-xl focus:outline-none focus:ring-2 transition-all appearance-none cursor-pointer text-slate-800 ${
                             errors.programa
                               ? "border-red-500 focus:ring-red-200"
-                              : "border-[var(--color-wine)]/10 focus:ring-[var(--color-red)]/20 focus:border-[var(--color-red)]"
+                              : "border-[var(--color-wine)]/20 focus:ring-[var(--color-red)]/20 focus:border-[var(--color-red)]"
                           }`}
                         >
-                          <option value="">-- Selecciona un programa --</option>
+                          <option value="" className="text-slate-800 bg-white">-- Selecciona un programa --</option>
                           {academicPrograms.map((p) => (
-                            <option key={p.id} value={p.title}>{p.title}</option>
+                            <option key={p.id} value={p.title} className="text-slate-800 bg-white">{p.title}</option>
                           ))}
                         </select>
-                        <div className="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none text-[var(--color-text)]/50">
+                        <div className="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none text-slate-500">
                           <ChevronDown className="h-5 w-5" />
                         </div>
                       </div>
-                      {errors.programa && <span className="text-xs text-red-500 font-medium">{errors.programa}</span>}
+                      {errors.programa && <span className="text-xs text-red-500 font-semibold">{errors.programa}</span>}
                     </div>
                   </div>
                 </div>
               )}
 
-              {/* Paso 3: Modalidad y Comentario */}
+              {/* Paso 3: Agenda tu Visita */}
               {currentStep === 3 && (
                 <div className="space-y-6 animate-fade-in">
-                  <div className="text-center mb-6">
-                    <h3 className="text-xl sm:text-2xl font-black text-[var(--color-wine)]">Modalidad y Detalles</h3>
-                    <p className="text-xs sm:text-sm text-[var(--color-text)]/60 mt-1">Cuéntanos cómo prefieres estudiar.</p>
+                  <div>
+                    <h3 className="text-xl sm:text-2xl font-black text-slate-800 uppercase">Agenda tu visita</h3>
+                    <p className="text-xs sm:text-sm text-slate-500 mt-1 font-sans">Elige modalidad, fecha y hora para acudir a nuestras instalaciones.</p>
                   </div>
+                  
                   <div className="space-y-5">
+                    {/* Modalidad por Pills */}
                     <div className="flex flex-col gap-2">
-                      <label className="text-xs uppercase font-bold text-[var(--color-text)]/70 tracking-wider">
+                      <label className="text-xs uppercase font-bold text-slate-700 tracking-wider">
                         Modalidad *
                       </label>
                       <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                        {["Escolarizada", "Sabatina", "En línea", "Mixta", "Flexible", "Por confirmar"].map((m) => (
+                        {["Matutino", "Nocturno", "Sábados", "Viernes", "En línea", "Por confirmar"].map((m) => (
                           <button
                             key={m}
                             type="button"
                             onClick={() => setModalidad(m)}
-                            className={`h-10 rounded-xl text-xs font-bold border transition-all ${
+                            className={`h-11 rounded-xl text-xs font-bold border transition-all cursor-pointer ${
                               modalidad === m
                                 ? "bg-[var(--color-wine)] text-white border-[var(--color-wine)] shadow-md"
-                                : "bg-white text-[var(--color-text)] border-[var(--color-wine)]/10 hover:bg-[var(--color-cream)]"
+                                : "bg-white text-slate-800 border-[var(--color-wine)]/10 hover:bg-[var(--color-cream)] hover:border-[var(--color-wine)]/25"
                             }`}
                           >
                             {m}
                           </button>
                         ))}
                       </div>
-                      {errors.modalidad && <span className="text-xs text-red-500 font-medium">{errors.modalidad}</span>}
+                      {errors.modalidad && <span className="text-xs text-red-500 font-semibold">{errors.modalidad}</span>}
                     </div>
+
+                    {/* Fecha */}
                     <div className="flex flex-col gap-1.5">
-                      <label htmlFor="comentario" className="text-xs uppercase font-bold text-[var(--color-text)]/70 tracking-wider">
+                      <label htmlFor="fecha" className="text-xs uppercase font-bold text-slate-700 tracking-wider flex items-center gap-1">
+                        <Calendar className="w-3.5 h-3.5 text-[var(--color-red)]" />
+                        Fecha de Visita *
+                      </label>
+                      <input
+                        id="fecha"
+                        type="date"
+                        value={fecha}
+                        onChange={(e) => {
+                          setFecha(e.target.value)
+                          // Reiniciar hora al cambiar fecha
+                          setHora("")
+                        }}
+                        className={`w-full h-14 px-4 text-sm bg-white border rounded-xl focus:outline-none focus:ring-2 transition-all text-slate-800 ${
+                          errors.fecha
+                            ? "border-red-500 focus:ring-red-200"
+                            : "border-[var(--color-wine)]/20 focus:ring-[var(--color-red)]/20 focus:border-[var(--color-red)]"
+                        }`}
+                      />
+                      {errors.fecha && <span className="text-xs text-red-500 font-semibold">{errors.fecha}</span>}
+                    </div>
+
+                    {/* Hora */}
+                    <div className="flex flex-col gap-1.5">
+                      <label className="text-xs uppercase font-bold text-slate-700 tracking-wider flex items-center gap-1">
+                        <Clock className="w-3.5 h-3.5 text-[var(--color-red)]" />
+                        Hora de Visita *
+                      </label>
+                      {!fecha ? (
+                        <div className="p-3 bg-slate-50 border border-dashed border-slate-200 rounded-xl text-center text-xs text-slate-500 font-medium font-sans">
+                          Primero selecciona una fecha.
+                        </div>
+                      ) : (() => {
+                        const [year, month, dayVal] = fecha.split('-').map(Number)
+                        const dateObj = new Date(year, month - 1, dayVal)
+                        const isSunday = dateObj.getDay() === 0
+                        const isSaturday = dateObj.getDay() === 6
+
+                        if (isSunday) {
+                          return (
+                            <div className="p-3 bg-red-50 border border-red-200 rounded-xl text-center text-xs text-red-600 font-medium font-sans">
+                              Los domingos no hay atención disponible.
+                            </div>
+                          )
+                        }
+
+                        const hoursList = isSaturday
+                          ? ["08:00 AM", "09:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "01:00 PM", "02:00 PM", "03:00 PM", "04:00 PM"]
+                          : ["09:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "01:00 PM", "02:00 PM", "03:00 PM", "04:00 PM", "05:00 PM", "06:00 PM", "07:00 PM", "08:00 PM"]
+
+                        return (
+                          <div className="grid grid-cols-3 gap-2">
+                            {hoursList.map((h) => (
+                              <button
+                                key={h}
+                                type="button"
+                                onClick={() => setHora(h)}
+                                className={`h-11 rounded-xl text-xs font-bold border transition-all cursor-pointer ${
+                                  hora === h
+                                    ? "bg-[var(--color-wine)] text-white border-[var(--color-wine)] shadow-md"
+                                    : "bg-white text-slate-800 border-[var(--color-wine)]/10 hover:bg-[var(--color-cream)] hover:border-[var(--color-wine)]/25"
+                                }`}
+                              >
+                                {h}
+                              </button>
+                            ))}
+                          </div>
+                        )
+                      })()}
+                      {errors.hora && <span className="text-xs text-red-500 font-semibold">{errors.hora}</span>}
+                    </div>
+
+                    {/* Comentario */}
+                    <div className="flex flex-col gap-1.5">
+                      <label htmlFor="comentario" className="text-xs uppercase font-bold text-slate-700 tracking-wider">
                         Comentario (Opcional)
                       </label>
                       <textarea
@@ -474,7 +643,7 @@ Comentario: ${commentText}`
                         onChange={(e) => setComentario(e.target.value)}
                         placeholder="Ej. Requisitos, costos, revalidación..."
                         rows={3}
-                        className="w-full p-4 text-sm bg-[var(--color-cream)]/30 border border-[var(--color-wine)]/10 focus:ring-2 focus:ring-[var(--color-red)]/20 focus:border-[var(--color-red)] focus:outline-none rounded-xl transition-all resize-none"
+                        className="w-full p-4 text-sm bg-white border border-[var(--color-wine)]/20 focus:ring-2 focus:ring-[var(--color-red)]/20 focus:border-[var(--color-red)] focus:outline-none rounded-xl transition-all resize-none text-slate-800 placeholder-slate-400"
                       />
                     </div>
                   </div>
@@ -487,15 +656,19 @@ Comentario: ${commentText}`
                   <div className="w-16 h-16 bg-[var(--color-red)]/10 text-[var(--color-red)] rounded-full flex items-center justify-center mx-auto mb-4">
                     <CheckCircle className="w-8 h-8" />
                   </div>
-                  <h3 className="text-xl sm:text-2xl font-black text-[var(--color-wine)]">¡Todo listo, {nombre.split(' ')[0]}!</h3>
-                  <p className="text-sm text-[var(--color-text)]/70 mb-6">
-                    Tu solicitud está lista para enviarse. Revisa el resumen y haz clic en enviar.
+                  <h3 className="text-xl sm:text-2xl font-black text-slate-800 uppercase">Confirma tu solicitud</h3>
+                  <p className="text-xs sm:text-sm text-slate-500 font-sans">
+                    Tu cita está lista para enviarse por WhatsApp. Revisa tus datos antes de enviarlos.
                   </p>
                   
-                  <div className="bg-[var(--color-cream)] p-4 rounded-2xl text-left border border-[var(--color-wine)]/5 space-y-2 text-sm text-[var(--color-text)]">
-                    <p><strong>Programa:</strong> {programa}</p>
-                    <p><strong>Modalidad:</strong> {modalidad}</p>
-                    <p><strong>Teléfono:</strong> {telefono}</p>
+                  <div className="bg-[var(--color-cream)] p-6 rounded-2xl text-left border border-[var(--color-wine)]/10 space-y-3 text-slate-800 font-sans shadow-sm">
+                    <p className="border-b border-[var(--color-wine)]/5 pb-2 text-xs sm:text-sm"><strong>Nombre:</strong> {nombre}</p>
+                    <p className="border-b border-[var(--color-wine)]/5 pb-2 text-xs sm:text-sm"><strong>WhatsApp:</strong> {telefono}</p>
+                    <p className="border-b border-[var(--color-wine)]/5 pb-2 text-xs sm:text-sm"><strong>Programa:</strong> {programa}</p>
+                    <p className="border-b border-[var(--color-wine)]/5 pb-2 text-xs sm:text-sm"><strong>Modalidad:</strong> {modalidad}</p>
+                    <p className="border-b border-[var(--color-wine)]/5 pb-2 text-xs sm:text-sm"><strong>Fecha de visita:</strong> {fecha}</p>
+                    <p className="border-b border-[var(--color-wine)]/5 pb-2 text-xs sm:text-sm"><strong>Hora de visita:</strong> {hora}</p>
+                    <p className="text-xs sm:text-sm"><strong>Comentarios:</strong> {comentario.trim() || "Ninguno."}</p>
                   </div>
                 </div>
               )}
@@ -506,7 +679,7 @@ Comentario: ${commentText}`
                   <Button
                     onClick={prevStep}
                     variant="outline"
-                    className="flex-1 h-12 rounded-xl text-[var(--color-wine)] border-[var(--color-wine)]/20 hover:bg-[var(--color-cream)]"
+                    className="flex-1 h-14 rounded-xl text-slate-700 border-[var(--color-wine)]/25 hover:bg-slate-50 font-bold cursor-pointer transition-all"
                   >
                     Atrás
                   </Button>
@@ -515,7 +688,7 @@ Comentario: ${commentText}`
                   <Button
                     onClick={nextStep}
                     variant="primary"
-                    className="flex-[2] h-12 rounded-xl bg-[var(--color-wine)] hover:bg-[var(--color-red)] text-white shadow-lg"
+                    className="flex-[2] h-14 rounded-xl bg-[var(--color-wine)] hover:bg-[var(--color-red)] text-white shadow-lg font-bold cursor-pointer transition-all hover:scale-[1.01]"
                   >
                     Continuar
                   </Button>
@@ -523,7 +696,7 @@ Comentario: ${commentText}`
                   <Button
                     onClick={handleSubmit}
                     variant="primary"
-                    className="flex-[2] h-12 rounded-xl bg-[#25D366] hover:bg-[#1DA851] text-white shadow-lg flex items-center justify-center gap-2 font-bold"
+                    className="flex-[2] h-14 rounded-xl bg-[var(--color-red)] hover:bg-[var(--color-wine)] text-white shadow-lg flex items-center justify-center gap-2 font-bold cursor-pointer transition-all hover:scale-[1.02]"
                   >
                     <MessageCircle className="w-5 h-5" />
                     Enviar por WhatsApp
@@ -532,17 +705,6 @@ Comentario: ${commentText}`
               </div>
 
             </AnimatedReveal>
-
-            {/* Búho Guía Lateral del form */}
-            <div className="hidden lg:block absolute -right-20 top-1/2 -translate-y-1/2 w-48 h-48 mascot-float z-0 opacity-90 pointer-events-none select-none">
-              <Image
-                src="/images/brand/mascota-uc.webp"
-                alt="Mascota UC Formulario"
-                fill
-                className="object-contain"
-                sizes="192px"
-              />
-            </div>
 
           </div>
         </div>
@@ -563,10 +725,10 @@ Comentario: ${commentText}`
                   </div>
                   <div>
                     <h2 className="text-xl sm:text-2xl font-black text-[var(--color-wine)] tracking-tight uppercase">
-                      Documentación general
+                      Requisitos de inscripción
                     </h2>
                     <p className="text-xs sm:text-sm text-[var(--color-text)]/60 mt-1">
-                      Despliega para ver la lista referencial de documentos.
+                      Despliega para ver la lista oficial de documentos.
                     </p>
                   </div>
                 </div>
@@ -576,9 +738,8 @@ Comentario: ${commentText}`
               <div className={`transition-all duration-500 ease-in-out overflow-hidden ${reqExpanded ? 'max-h-[800px] opacity-100' : 'max-h-0 opacity-0'}`}>
                 <div className="p-6 sm:p-8 pt-0 border-t border-[var(--color-wine)]/5 grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div>
-                    <p className="text-sm text-[var(--color-text)]/80 leading-relaxed mb-4">
-                      Esta lista es referencial. Los requisitos pueden variar según el programa y nivel académico. 
-                      Admisiones te confirmará la lista oficial actualizada para tu inscripción.
+                    <p className="text-sm font-bold text-[var(--color-text)]/90 mb-4">
+                      En original y copia:
                     </p>
                     {/* Foto Documentos */}
                     <div className="relative w-full aspect-video rounded-2xl overflow-hidden bg-[var(--color-cream)] border border-[var(--color-wine)]/5">
@@ -630,7 +791,7 @@ Comentario: ${commentText}`
                       onClick={() => setActiveFaq(isActive ? null : idx)}
                       className="w-full flex items-center justify-between p-5 text-left text-sm font-bold text-[var(--color-text)] hover:text-[var(--color-red)] cursor-pointer"
                     >
-                      <span className="flex items-center gap-3">
+                      <span className="flex items-center gap-3 font-sans">
                         <HelpCircle className="h-5 w-5 text-[var(--color-red)]/70 shrink-0" />
                         {faq.q}
                       </span>
@@ -642,7 +803,7 @@ Comentario: ${commentText}`
                     </button>
                     {isActive && (
                       <div className="px-5 pb-5 pt-1 border-t border-[var(--color-wine)]/5">
-                        <p className="text-sm text-[var(--color-text)]/70 leading-relaxed pl-8">
+                        <p className="text-sm text-[var(--color-text)]/70 leading-relaxed pl-8 font-sans">
                           {faq.a}
                         </p>
                       </div>
@@ -686,7 +847,7 @@ Comentario: ${commentText}`
 
           <div className="relative z-10 max-w-2xl mx-auto flex flex-col items-center">
             <AnimatedReveal direction="up">
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black mb-4 tracking-tight drop-shadow-sm text-balance">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black mb-4 tracking-tight drop-shadow-sm text-balance uppercase">
                 Da el primer paso hacia tu formación profesional
               </h2>
             </AnimatedReveal>
@@ -700,23 +861,21 @@ Comentario: ${commentText}`
             <AnimatedReveal direction="up" delay={0.2} className="w-full">
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-4 w-full">
                 <Button 
-                  onClick={handleScrollToForm}
-                  variant="primary" 
-                  size="lg" 
-                  className="bg-white text-[var(--color-wine)] hover:bg-[var(--color-cream)] shadow-xl shadow-black/10 h-14 rounded-2xl cursor-pointer"
+                  href="https://c1-uct.algebraix.com/bin/g/enrollments/default/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  variant="primary"
+                  className="bg-white text-[var(--color-wine)] hover:bg-[var(--color-cream)] hover:text-[var(--color-wine)] shadow-xl shadow-black/10 h-14 rounded-2xl cursor-pointer text-sm font-bold flex items-center justify-center transition-all duration-300 w-full sm:w-auto px-8 border-none"
                 >
-                  Llenar formulario
+                  Quiero inscribirme en línea
                 </Button>
                 <Button 
-                  href={whatsappGeneralUrl} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
+                  onClick={handleScrollToForm}
                   variant="outline" 
                   size="lg" 
-                  className="border-white/30 text-white hover:bg-white/10 h-14 rounded-2xl cursor-pointer backdrop-blur-sm"
+                  className="border-white/30 text-white hover:bg-white/10 h-14 rounded-2xl cursor-pointer backdrop-blur-sm font-bold flex items-center justify-center"
                 >
-                  <MessageCircle className="mr-2 h-5 w-5 fill-white/10" />
-                  Hablar por WhatsApp
+                  Quiero ir a inscribirme
                 </Button>
               </div>
             </AnimatedReveal>

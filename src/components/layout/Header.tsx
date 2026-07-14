@@ -81,7 +81,7 @@ export function Header() {
 
         {/* Desktop CTA */}
         <div className="hidden xl:flex items-center gap-3">
-          <Button href={createWhatsAppLink(WHATSAPP_MESSAGES.ucVirtual)} target="_blank" rel="noopener noreferrer" variant="outline" size="sm" className="shadow-sm">
+          <Button href="https://c1-uct.algebraix.com/bin/g/start/logout/?x_load=0&" target="_blank" rel="noopener noreferrer" variant="outline" size="sm" className="shadow-sm">
             UC Virtual
           </Button>
           <Button href={whatsappUrl} target="_blank" rel="noopener noreferrer" variant="primary" size="sm" className="shadow-md shadow-[var(--color-red)]/20">
@@ -159,7 +159,7 @@ export function Header() {
               </div>
             ))}
             <div className="pt-6 space-y-3">
-              <Button href={createWhatsAppLink(WHATSAPP_MESSAGES.ucVirtual)} target="_blank" rel="noopener noreferrer" variant="outline" className="w-full">
+              <Button href="https://c1-uct.algebraix.com/bin/g/start/logout/?x_load=0&" target="_blank" rel="noopener noreferrer" variant="outline" className="w-full">
                 UC Virtual
               </Button>
               <Button href={whatsappUrl} target="_blank" rel="noopener noreferrer" variant="primary" className="w-full shadow-lg shadow-[var(--color-red)]/20">

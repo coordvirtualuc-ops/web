@@ -44,8 +44,8 @@ const testimonialsData: Testimonial[] = [
     whatsappMessage: "Hola, quiero información sobre la Licenciatura en Administración de Empresas."
   },
   {
-    id: "daniela-sanchez",
-    name: "Daniela Sánchez Ortega",
+    id: "daniel-sanchez",
+    name: "Daniel Sánchez Ortega",
     program: "Licenciatura en Criminología y Criminalística",
     generation: "Generación: 2019–2022",
     image: "/images/testimonios/daniela-sanchez.webp",

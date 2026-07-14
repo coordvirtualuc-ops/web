@@ -2,10 +2,7 @@ import type { Metadata } from "next"
 import { Montserrat, Inter } from "next/font/google"
 import "./globals.css"
 import { siteConfig } from "@/content/site"
-import { Header } from "@/components/layout/Header"
-import { Footer } from "@/components/layout/Footer"
-import { WhatsAppButton } from "@/components/layout/WhatsAppButton"
-import { WelcomeMascot } from "@/components/layout/WelcomeMascot"
+import { PublicShell } from "@/components/layout/PublicShell"
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -19,22 +16,28 @@ const inter = Inter({
   weight: ["400", "500", "600"],
 })
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.ucuniversidadcontinental.edu.mx"
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
     default: "UC Universidad Continental | Universidad en Tepic, Nayarit",
-    template: `%s | ${siteConfig.shortName}`,
+    template: "%s | UC Universidad Continental",
   },
-  description: siteConfig.description,
+  description: "UC Universidad Continental ofrece programas académicos con enfoque humanista, acompañamiento cercano y formación profesional en Tepic, Nayarit.",
   keywords: siteConfig.seo.keywords,
   authors: [{ name: "UC Universidad Continental" }],
   creator: "UC Universidad Continental",
   openGraph: {
     type: "website",
     locale: "es_MX",
-    url: siteConfig.seo.url || undefined,
+    url: siteUrl,
     title: "UC Universidad Continental | Universidad en Tepic, Nayarit",
-    description: siteConfig.description,
-    siteName: siteConfig.name,
+    description: "UC Universidad Continental ofrece programas académicos con enfoque humanista, acompañamiento cercano y formación profesional en Tepic, Nayarit.",
+    siteName: "UC Universidad Continental",
+  },
+  twitter: {
+    card: "summary_large_image",
   },
 }
 
@@ -46,13 +49,9 @@ export default function RootLayout({
   return (
     <html lang="es" className={`scroll-smooth ${montserrat.variable} ${inter.variable}`}>
       <body className="min-h-screen bg-[var(--color-cream)] text-[var(--color-text)] antialiased flex flex-col font-sans">
-        <WelcomeMascot />
-        <Header />
-        <main className="flex-1 flex flex-col w-full">
+        <PublicShell>
           {children}
-        </main>
-        <Footer />
-        <WhatsAppButton />
+        </PublicShell>
       </body>
     </html>
   )

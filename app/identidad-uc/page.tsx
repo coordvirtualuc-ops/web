@@ -2,10 +2,11 @@ import type { Metadata } from "next"
 import { IdentityPage } from "@/components/sections/IdentityPage"
 
 export const metadata: Metadata = {
-  title: {
-    absolute: "Identidad UC | UC Universidad Continental",
+  title: "Identidad UC | Universidad Continental",
+  description: "Conoce la historia, filosofía institucional, modelo educativo humanista y valores de UC Universidad Continental.",
+  alternates: {
+    canonical: "/identidad-uc",
   },
-  description: "Conoce la identidad institucional de UC Universidad Continental: modelo educativo humanista, acompañamiento cercano, valores y compromiso académico.",
 }
 
 export default function IdentidadPage() {

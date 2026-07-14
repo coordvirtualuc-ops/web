@@ -186,7 +186,7 @@ export function StudentLifePage() {
 
               <AnimatedReveal direction="up" delay={0.3}>
                 <p className="text-lg sm:text-xl text-[var(--color-text)] md:text-2xl leading-relaxed mb-10 text-balance max-w-xl font-medium">
-                  Una comunidad académica cercana, humana y enfocada en acompañar tu desarrollo.
+                  Experiencias académicas, culturales y profesionales que impulsarán tu desarrollo personal y profesional.
                 </p>
               </AnimatedReveal>
 

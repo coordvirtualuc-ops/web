@@ -7,13 +7,15 @@ import {
   MessageCircle, 
   Target, 
   BookOpen, 
-  Clock, 
   GraduationCap, 
   Heart, 
   Compass, 
   Eye, 
   Award,
-  CheckCircle2
+  CheckCircle2,
+  HelpCircle,
+  Briefcase,
+  Sparkles
 } from "lucide-react"
 import { Section } from "@/components/ui/Section"
 import { Button } from "@/components/ui/Button"
@@ -28,45 +30,88 @@ export function IdentityPage() {
 
   const pilaresModelo = [
     {
-      title: "Aprendizaje con impacto real",
-      description: "Nuestros planes de estudio conectan directamente la teoría con retos del entorno laboral actual.",
+      title: "Formación Humanista",
+      description: "Fomentamos la honestidad, el respeto, la responsabilidad, la empatía, la lealtad y la tolerancia como base del actuar profesional.",
+      icon: Compass,
+    },
+    {
+      title: "Excelencia Académica",
+      description: "Brindamos una formación de calidad, pertinente e innovadora para responder a los retos del entorno profesional.",
+      icon: Award,
+    },
+    {
+      title: "Aprendizaje basado en Proyectos Transversales",
+      description: "Integramos los conocimientos de distintas asignaturas para desarrollar proyectos que resuelven necesidades reales de empresas, organizaciones y comunidades.",
       icon: Target,
     },
     {
-      title: "Profesores altamente capacitados",
-      description: "Docentes experimentados en activo que transmiten experiencia práctica además de académica.",
-      icon: GraduationCap,
-    },
-    {
-      title: "Programas innovadores y actualizados",
-      description: "Plan curricular diseñado para responder a las demandas del mercado profesional contemporáneo.",
+      title: "Vinculación con la Comunidad",
+      description: "Promovemos el servicio, la participación y la responsabilidad social como parte de la formación universitaria.",
       icon: BookOpen,
     },
     {
-      title: "Modalidades flexibles según programa",
-      description: "Horarios y formatos adaptables para que puedas balancear tu formación y tus compromisos diarios.",
-      icon: Clock,
+      title: "Impacto Social",
+      description: "Formamos profesionales capaces de generar cambios positivos que contribuyan al bienestar de su comunidad y de la sociedad.",
+      icon: GraduationCap,
     },
     {
-      title: "Acompañamiento cercano",
-      description: "Atención personalizada para asegurar tu éxito académico y tu desarrollo personal en cada etapa.",
+      title: "Desarrollo Integral",
+      description: "Impulsamos el crecimiento personal, ético y profesional para formar líderes comprometidos con la transformación de su entorno.",
       icon: Heart,
-    },
-    {
-      title: "Formación con sentido humano",
-      description: "Impulsamos valores, ética y el desarrollo integral del estudiante para contribuir a la sociedad.",
-      icon: Compass,
     },
   ]
 
   const valores = [
-    { name: "Respeto", desc: "Reconocimiento del valor propio y de los demás." },
-    { name: "Responsabilidad", desc: "Cumplimiento consciente de nuestros compromisos." },
-    { name: "Compromiso", desc: "Dedicación y entrega hacia metas académicas y sociales." },
-    { name: "Servicio", desc: "Disposición para apoyar y aportar valor a nuestra comunidad." },
-    { name: "Honestidad", desc: "Actuación con rectitud, ética y transparencia." },
-    { name: "Superación", desc: "Búsqueda constante de crecimiento y excelencia." },
-    { name: "Humanismo", desc: "El estudiante como centro y fin de toda acción formativa." },
+    "Calidad",
+    "Honestidad",
+    "Lealtad",
+    "Respeto",
+    "Responsabilidad",
+    "Tolerancia",
+    "Empatía"
+  ]
+
+  const porQueElegir = [
+    {
+      title: "Titulación con Validez Oficial",
+      desc: "Todos nuestros programas cuentan con RVOE y están avalados por la SEP y la Dirección General de Profesiones (DGP), lo que te permite obtener tu título y cédula profesional con reconocimiento oficial."
+    },
+    {
+      title: "Concluye tu carrera en 3 años",
+      desc: "Nuestros planes de estudio están diseñados para que obtengas tu formación profesional en tres años, permitiéndote incorporarte antes al mercado laboral o continuar con estudios de posgrado."
+    },
+    {
+      title: "Certificación Internacional en Inglés",
+      desc: "Nuestros estudiantes egresan con Certificación Cambridge B1, fortaleciendo sus competencias y ampliando sus oportunidades académicas y laborales."
+    },
+    {
+      title: "Vinculación con el Sector Productivo",
+      desc: "Contamos con convenios con instituciones públicas y privadas donde podrás realizar prácticas profesionales y servicio social, generando experiencia y oportunidades de empleo."
+    },
+    {
+      title: "Formación para Emprender",
+      desc: "Impulsamos una línea de formación en emprendimiento para desarrollar habilidades de liderazgo, innovación y creación de proyectos que generen valor para la sociedad."
+    },
+    {
+      title: "Docentes con Experiencia Profesional",
+      desc: "Aprende de profesores con estudios de posgrado y experiencia activa en su campo profesional, quienes enriquecen el aprendizaje con casos y conocimientos del entorno laboral."
+    },
+    {
+      title: "Grupos Reducidos",
+      desc: "Nuestros grupos pequeños favorecen un acompañamiento académico cercano, atención personalizada y un mejor seguimiento del desarrollo de cada estudiante."
+    },
+    {
+      title: "Aprendizaje Basado en Proyectos Transversales",
+      desc: "Integramos los conocimientos de distintas asignaturas mediante proyectos que responden a necesidades reales de empresas, organizaciones y comunidades, fortaleciendo la experiencia práctica y el compromiso social."
+    },
+    {
+      title: "Modalidades y Horarios Flexibles",
+      desc: "Elige la modalidad que mejor se adapte a tu estilo de vida: presencial, mixta o virtual, con horarios diseñados para estudiantes que trabajan, emprenden o tienen otras responsabilidades."
+    },
+    {
+      title: "Múltiples Opciones de Titulación",
+      desc: "Ofrecemos diversas modalidades de titulación para que puedas elegir la opción que mejor se adapte a tu perfil académico y profesional."
+    }
   ]
 
   return (
@@ -94,23 +139,17 @@ export function IdentityPage() {
             <div className="flex flex-col items-start lg:col-span-7">
               <AnimatedReveal direction="up" delay={0.1}>
                 <span className="inline-block px-3.5 py-1 text-xs font-bold uppercase tracking-widest text-[var(--color-red)] bg-[var(--color-red)]/10 rounded-full mb-5">
-                  Quiénes somos
+                  Identidad UC
                 </span>
               </AnimatedReveal>
 
               <AnimatedReveal direction="up" delay={0.2}>
-                <h1 className="text-4xl font-black tracking-tight text-[var(--color-text)] sm:text-5xl md:text-6xl lg:text-[4rem] leading-[1.05] mb-6 text-balance">
-                  Identidad <span className="text-[var(--color-red)]">UC</span>
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[4rem] font-black tracking-tight text-[var(--color-wine)] leading-[1.1] mb-10 text-balance uppercase">
+                  “En UC la sabiduría no solo se aprende, <span className="text-[var(--color-red)]">también se vive.</span>”
                 </h1>
               </AnimatedReveal>
 
               <AnimatedReveal direction="up" delay={0.3}>
-                <p className="text-base sm:text-lg text-[var(--color-text)]/85 md:text-xl leading-relaxed mb-10 text-balance max-w-2xl font-medium">
-                  Una universidad con enfoque humanista, acompañamiento cercano y compromiso con la formación profesional.
-                </p>
-              </AnimatedReveal>
-
-              <AnimatedReveal direction="up" delay={0.4}>
                 <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto">
                   <Button
                     href="/oferta-academica"
@@ -134,13 +173,13 @@ export function IdentityPage() {
             </div>
 
             {/* Mascota en Hero */}
-            <div className="flex justify-center lg:col-span-5 w-full">
+            <div className="flex justify-center lg:col-span-5 w-full select-none">
               <AnimatedReveal direction="left" delay={0.3} className="relative w-full max-w-[280px] sm:max-w-[340px] aspect-square lg:max-w-md">
                 <div className="absolute inset-0 bg-gradient-to-tr from-[var(--color-wine)]/5 to-[var(--color-red)]/5 rounded-full blur-2xl z-0" />
                 <div className="relative w-full h-full mascot-float z-10">
                   <Image
                     src="/images/brand/mascota-uc.webp"
-                    alt="Mascota UC"
+                    alt="Nayo - Guardián del Conocimiento"
                     fill
                     className="object-contain drop-shadow-2xl"
                     priority
@@ -154,27 +193,77 @@ export function IdentityPage() {
         </div>
       </section>
 
-      {/* 2. BLOQUE QUIÉNES SOMOS */}
-      <Section id="quienes-somos" background="light" padding="lg" className="border-t border-[var(--color-wine)]/5">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      {/* 2. SEMBLANZA INSTITUCIONAL & VIDEO */}
+      <Section id="semblanza" background="light" padding="lg" className="border-t border-[var(--color-wine)]/5">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           
-          <div className="lg:col-span-5">
+          {/* Columna Izquierda: Título y Tarjeta de Video */}
+          <div className="lg:col-span-5 space-y-8">
             <AnimatedReveal direction="right">
               <span className="text-xs font-bold uppercase tracking-widest text-[var(--color-red)]">
-                Nuestra Esencia
+                Nuestra Historia
               </span>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[var(--color-wine)] mt-2 tracking-tight">
-                UC Universidad Continental
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[var(--color-wine)] mt-2 tracking-tight uppercase leading-tight">
+                Semblanza de UC Universidad Continental
               </h2>
+            </AnimatedReveal>
+
+            {/* Bloque de Video Institucional */}
+            <AnimatedReveal direction="up" delay={0.2}>
+              <div className="relative overflow-hidden bg-gradient-to-br from-[var(--color-wine)] to-[#3a0a1d] rounded-[2rem] p-6 sm:p-8 text-white shadow-xl border border-[var(--color-wine)]/5">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,var(--color-red),transparent_70%)] opacity-20" />
+                <div className="relative z-10 space-y-4">
+                  <div className="inline-flex p-3 bg-white/10 rounded-2xl text-[var(--color-cream)]">
+                    <svg className="w-8 h-8 fill-current" viewBox="0 0 24 24">
+                      <path d="M8 5v14l11-7z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-lg font-bold uppercase">Video Institucional</h3>
+                  <p className="text-xs text-white/80 leading-relaxed font-sans">
+                    Conoce más sobre la historia y esencia de UC. Descubre cómo vivimos nuestra misión educativa día con día.
+                  </p>
+                  <div className="pt-2">
+                    <Button
+                      href="https://drive.google.com/file/d/14QXe4oTf-bMGAvTouYItCc0OthFeYjfH/view?resourcekey"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      variant="primary"
+                      size="sm"
+                      className="bg-white text-[var(--color-wine)] hover:bg-[var(--color-cream)] border-none font-bold rounded-xl cursor-pointer inline-flex items-center gap-1.5 transition-all hover:scale-[1.02]"
+                    >
+                      Ver video institucional
+                      <ArrowRight className="h-4 w-4" />
+                    </Button>
+                  </div>
+                </div>
+              </div>
             </AnimatedReveal>
           </div>
 
+          {/* Columna Derecha: Texto de Semblanza */}
           <div className="lg:col-span-7">
-            <AnimatedReveal direction="left" delay={0.2}>
-              <p className="text-lg sm:text-xl text-[var(--color-text)]/90 leading-relaxed font-sans text-balance">
-                Somos una institución educativa enfocada en formar personas con criterio, preparación profesional y sentido humano. Nuestro compromiso es acompañar a cada estudiante en su desarrollo académico, personal and profesional.
+            <AnimatedReveal direction="left" delay={0.2} className="space-y-6 text-sm sm:text-base text-[var(--color-text)]/85 leading-relaxed font-sans text-balance">
+              <p>
+                En el 2010 UC Universidad Continental nace como proyecto de titulación de una egresada de la licenciatura en Ciencias de la Educación de la Universidad Autónoma de Nayarit, el cual consistía en la creación de una institución de nivel superior.
               </p>
-              <div className="mt-8 h-1 w-20 bg-[var(--color-red)] rounded" />
+              <p>
+                De 2012 a 2015 se inicia con el diseño del Modelo Educativo Humanista por expertos en el área del diseño curricular, y con una firme convicción de amor a la educación, que a través de sus conocimientos adquiridos, poder consolidar una institución que aporte y retribuya a la sociedad como un eje transformador de profesionistas integrales, consolidándose con un modelo formativo enfocado al desarrollo humano.
+              </p>
+              <p>
+                En el 2017 UC Universidad Continental se consolida legalmente con la validez oficial por parte de la Secretaría de Educación Pública y la Dirección General de Profesiones y así da inicio a su primera generación llevando como objetivo principal, calidad educativa y responsabilidad social.
+              </p>
+              <p>
+                Se cuenta con una mesa directiva profesional en el área de la educación, centrada en los procesos de innovación educativa, con actitud de servicio, responsabilidad social y compromiso ético.
+              </p>
+              <p>
+                Actualmente se cuenta con 8 generaciones de alumnos egresados, los cuales ya se encuentran en el campo laboral representando dignamente a esta noble institución.
+              </p>
+              <p>
+                Existe la inmensa satisfacción de colaborar en UC, pero ante todo existe la inmensa satisfacción de servir a nuestros estudiantes para una verdadera transformación integral.
+              </p>
+              <p className="font-bold text-[var(--color-red)] text-lg border-t border-[var(--color-wine)]/10 pt-4 mt-8">
+                Educación para la humanidad.
+              </p>
             </AnimatedReveal>
           </div>
 
@@ -185,7 +274,7 @@ export function IdentityPage() {
       <Section id="modelo-educativo" background="default" padding="lg" className="relative overflow-hidden border-t border-[var(--color-wine)]/5">
         
         {/* Mascota Watermark Background */}
-        <div className="absolute -bottom-16 -left-16 w-64 h-64 opacity-[0.04] pointer-events-none select-none z-0 mascot-watermark">
+        <div className="absolute -bottom-16 -left-16 w-64 h-64 opacity-[0.03] pointer-events-none select-none z-0 mascot-watermark">
           <Image
             src="/images/brand/mascota-uc.webp"
             alt="Mascota Watermark"
@@ -200,11 +289,11 @@ export function IdentityPage() {
             <span className="text-xs font-bold uppercase tracking-widest text-[var(--color-red)]">
               Enfoque Pedagógico
             </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[var(--color-wine)] mt-2 mb-4 tracking-tight">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[var(--color-wine)] mt-2 mb-4 tracking-tight uppercase">
               Modelo Educativo Humanista
             </h2>
-            <p className="text-base sm:text-lg text-[var(--color-text)]/80 max-w-2xl mx-auto leading-relaxed">
-              Creemos en una formación que combina conocimiento, acompañamiento y aplicación real. Nuestro modelo pone al estudiante al centro de su proceso formativo.
+            <p className="text-base sm:text-lg text-[var(--color-text)]/85 max-w-2xl mx-auto leading-relaxed text-balance">
+              Formamos personas y profesionales con excelencia académica, valores y sentido humanista, promoviendo el pensamiento crítico, la innovación y el compromiso social para transformar positivamente su entorno.
             </p>
           </AnimatedReveal>
         </div>
@@ -218,15 +307,15 @@ export function IdentityPage() {
                 key={idx} 
                 direction="up" 
                 delay={idx * 0.05}
-                className="group flex flex-col p-6 sm:p-8 bg-white/70 backdrop-blur-xs rounded-2xl border border-[var(--color-wine)]/5 hover:border-[var(--color-red)]/20 shadow-xs hover:shadow-md transition-all duration-300 hover:-translate-y-1"
+                className="group flex flex-col p-6 sm:p-8 bg-white rounded-[2rem] border border-[var(--color-wine)]/5 hover:border-[var(--color-red)]/20 shadow-xs hover:shadow-md transition-all duration-300 hover:-translate-y-1 h-full"
               >
-                <div className="w-12 h-12 flex items-center justify-center rounded-xl bg-[var(--color-wine)]/5 text-[var(--color-red)] mb-5 group-hover:bg-[var(--color-red)] group-hover:text-white transition-colors duration-300">
+                <div className="w-12 h-12 flex items-center justify-center rounded-2xl bg-[var(--color-wine)]/5 text-[var(--color-red)] mb-5 group-hover:bg-[var(--color-red)] group-hover:text-white transition-colors duration-300">
                   <IconComponent className="h-6 w-6" />
                 </div>
-                <h3 className="text-lg font-bold text-[var(--color-text)] mb-3 group-hover:text-[var(--color-wine)] transition-colors">
+                <h3 className="text-lg font-bold text-[var(--color-text)] mb-3 group-hover:text-[var(--color-wine)] transition-colors uppercase">
                   {pilar.title}
                 </h3>
-                <p className="text-sm text-[var(--color-text)]/70 leading-relaxed">
+                <p className="text-xs sm:text-sm text-[var(--color-text)]/70 leading-relaxed font-sans">
                   {pilar.description}
                 </p>
               </AnimatedReveal>
@@ -246,56 +335,38 @@ export function IdentityPage() {
             <span className="text-xs font-bold uppercase tracking-widest text-[var(--color-cream)]/70">
               Nuestra Misión y Visión
             </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mt-2 tracking-tight">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mt-2 tracking-tight uppercase">
               Filosofía Institucional
             </h2>
           </AnimatedReveal>
         </div>
 
-        {/* Misión, Visión, Propósito */}
-        <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+        {/* Misión y Visión */}
+        <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
           
           {/* Misión */}
-          <AnimatedReveal direction="up" delay={0.1} className="bg-white/5 border border-white/10 rounded-2xl p-8 backdrop-blur-md flex flex-col h-full hover:bg-white/[0.08] transition-colors">
-            <div className="w-12 h-12 flex items-center justify-center rounded-xl bg-white/10 text-[var(--color-cream)] mb-6">
+          <AnimatedReveal direction="up" delay={0.1} className="bg-white/5 border border-white/10 rounded-[2rem] p-8 sm:p-10 backdrop-blur-md flex flex-col h-full hover:bg-white/[0.08] transition-colors">
+            <div className="w-12 h-12 flex items-center justify-center rounded-2xl bg-white/10 text-[var(--color-cream)] mb-6">
               <Target className="h-6 w-6 text-[var(--color-red)]" />
             </div>
-            <h3 className="text-xl font-bold text-white mb-4">Misión</h3>
-            <p className="text-sm sm:text-base text-white/80 leading-relaxed font-sans">
-              “Formar estudiantes con preparación académica, criterio profesional y compromiso humano.”
+            <h3 className="text-xl font-bold text-white mb-4 uppercase">Misión</h3>
+            <p className="text-sm sm:text-base text-white/95 leading-relaxed font-sans">
+              Formar seres humanos con capacidades profesionales que generen conocimientos de excelencia académica, para la resolución de problemáticas sociales, promoviendo el desarrollo sustentable comunitario, con actitud crítica y reflexiva, así como valores para la consolidación de una sociedad más justa, solidaria, humanista e inclusiva.
             </p>
           </AnimatedReveal>
 
           {/* Visión */}
-          <AnimatedReveal direction="up" delay={0.2} className="bg-white/5 border border-white/10 rounded-2xl p-8 backdrop-blur-md flex flex-col h-full hover:bg-white/[0.08] transition-colors">
-            <div className="w-12 h-12 flex items-center justify-center rounded-xl bg-white/10 text-[var(--color-cream)] mb-6">
+          <AnimatedReveal direction="up" delay={0.2} className="bg-white/5 border border-white/10 rounded-[2rem] p-8 sm:p-10 backdrop-blur-md flex flex-col h-full hover:bg-white/[0.08] transition-colors">
+            <div className="w-12 h-12 flex items-center justify-center rounded-2xl bg-white/10 text-[var(--color-cream)] mb-6">
               <Eye className="h-6 w-6 text-[var(--color-red)]" />
             </div>
-            <h3 className="text-xl font-bold text-white mb-4">Visión</h3>
-            <p className="text-sm sm:text-base text-white/80 leading-relaxed font-sans">
-              “Consolidarnos como una institución educativa cercana, actualizada y comprometida con el desarrollo de sus estudiantes.”
-            </p>
-          </AnimatedReveal>
-
-          {/* Propósito */}
-          <AnimatedReveal direction="up" delay={0.3} className="bg-white/5 border border-white/10 rounded-2xl p-8 backdrop-blur-md flex flex-col h-full hover:bg-white/[0.08] transition-colors">
-            <div className="w-12 h-12 flex items-center justify-center rounded-xl bg-white/10 text-[var(--color-cream)] mb-6">
-              <Award className="h-6 w-6 text-[var(--color-red)]" />
-            </div>
-            <h3 className="text-xl font-bold text-white mb-4">Propósito</h3>
-            <p className="text-sm sm:text-base text-white/80 leading-relaxed font-sans">
-              “Impulsar una educación que prepare para la vida profesional sin perder el sentido humano.”
+            <h3 className="text-xl font-bold text-white mb-4 uppercase">Visión</h3>
+            <p className="text-sm sm:text-base text-white/95 leading-relaxed font-sans">
+              Posicionarse como una institución reconocida por su nivel académico, consolidada y de prestigio; que forma egresados de excelencia y con valores capaces de transformar su entorno.
             </p>
           </AnimatedReveal>
 
         </div>
-
-        {/* Disclaimer / Nota de base editable */}
-        <AnimatedReveal direction="up" delay={0.4} className="relative z-10 text-center mt-12">
-          <p className="text-xs text-white/50 italic max-w-lg mx-auto">
-            * Estos textos son bases editables y no deben presentarse como documentos oficiales definitivos sin previa confirmación institucional.
-          </p>
-        </AnimatedReveal>
       </Section>
 
       {/* 5. VALORES UC */}
@@ -305,53 +376,107 @@ export function IdentityPage() {
             <span className="text-xs font-bold uppercase tracking-widest text-[var(--color-red)]">
               Pilares de Conducta
             </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[var(--color-wine)] mt-2 tracking-tight">
-              Valores UC
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[var(--color-wine)] mt-2 tracking-tight uppercase">
+              Valores Institucionales UC
             </h2>
           </AnimatedReveal>
         </div>
 
-        <div className="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto">
+        <div className="flex flex-wrap justify-center gap-3.5 max-w-4xl mx-auto">
           {valores.map((val, idx) => (
             <AnimatedReveal 
               key={idx}
               direction="up"
               delay={idx * 0.05}
-              className="flex items-center gap-2.5 px-5 py-3 bg-[var(--color-cream)] hover:bg-[var(--color-wine)] hover:text-white rounded-xl border border-[var(--color-wine)]/5 transition-all duration-300 group cursor-default"
+              className="flex items-center gap-2.5 px-6 py-3.5 bg-white hover:bg-[var(--color-wine)] hover:text-white rounded-xl border border-[var(--color-wine)]/5 transition-all duration-300 group cursor-default shadow-xs"
             >
-              <CheckCircle2 className="h-4 w-4 text-[var(--color-red)] group-hover:text-white transition-colors" />
+              <CheckCircle2 className="h-4 w-4 text-[var(--color-red)] group-hover:text-white transition-colors shrink-0" />
               <span className="text-sm sm:text-base font-bold text-[var(--color-text)] group-hover:text-white transition-colors">
-                {val.name}
+                {val}
               </span>
             </AnimatedReveal>
           ))}
         </div>
       </Section>
 
-      {/* 6. TRAYECTORIA */}
-      <Section id="trayectoria" background="muted" padding="md" className="border-b border-[var(--color-wine)]/5">
-        <div className="max-w-4xl mx-auto bg-white border border-[var(--color-wine)]/5 rounded-3xl p-8 sm:p-12 shadow-xs relative overflow-hidden">
+      {/* 6. ¿POR QUÉ ELEGIR UC? */}
+      <Section id="elegir-uc" background="muted" padding="lg" className="border-b border-[var(--color-wine)]/5">
+        <div className="max-w-7xl mx-auto">
           
-          {/* Fondo decorativo sutil */}
-          <div className="absolute top-0 right-0 w-48 h-48 bg-[var(--color-red)]/5 rounded-bl-full pointer-events-none" />
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <AnimatedReveal direction="up">
+              <span className="text-xs font-bold uppercase tracking-widest text-[var(--color-red)]">
+                Ventajas de nuestra propuesta
+              </span>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[var(--color-wine)] mt-2 mb-4 tracking-tight uppercase">
+                ¿Por qué elegir UC Universidad Continental?
+              </h2>
+              <p className="text-base sm:text-lg text-[var(--color-text)]/80 leading-relaxed text-balance">
+                Formamos profesionales con excelencia académica, visión humanista y experiencia práctica para transformar su entorno y construir un futuro con mayores oportunidades.
+              </p>
+            </AnimatedReveal>
+          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center relative z-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 items-stretch">
+            {porQueElegir.map((punto, idx) => (
+              <AnimatedReveal 
+                key={idx}
+                direction="up"
+                delay={idx * 0.04}
+                className="group p-6 sm:p-8 bg-white rounded-[2rem] border border-[var(--color-wine)]/5 hover:border-[var(--color-red)]/20 hover:shadow-md transition-all duration-300 flex flex-col justify-start h-full"
+              >
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 flex items-center justify-center rounded-xl bg-[var(--color-wine)]/5 text-[var(--color-red)] group-hover:bg-[var(--color-red)] group-hover:text-white transition-colors shrink-0 mt-0.5 font-bold text-sm">
+                    {idx + 1}
+                  </div>
+                  <div className="space-y-2">
+                    <h3 className="text-lg font-bold text-[var(--color-text)] tracking-tight group-hover:text-[var(--color-wine)] transition-colors">
+                      {punto.title}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-[var(--color-text)]/70 leading-relaxed font-sans">
+                      {punto.desc}
+                    </p>
+                  </div>
+                </div>
+              </AnimatedReveal>
+            ))}
+          </div>
+
+        </div>
+      </Section>
+
+      {/* 7. MASCOTA INSTITUCIONAL */}
+      <Section id="mascota-institucional" background="light" padding="lg" className="border-b border-[var(--color-wine)]/5 relative overflow-hidden">
+        <div className="mx-auto w-full max-w-7xl">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
-            <div className="md:col-span-5">
-              <AnimatedReveal direction="right">
-                <span className="text-xs font-bold uppercase tracking-widest text-[var(--color-red)]">
-                  Presencia Local
-                </span>
-                <h2 className="text-2xl sm:text-3xl font-black text-[var(--color-wine)] mt-1.5 leading-tight tracking-tight">
-                  Una comunidad académica en crecimiento
-                </h2>
+            {/* Columna Izquierda: Nayo Grande */}
+            <div className="lg:col-span-5 flex justify-center w-full select-none">
+              <AnimatedReveal direction="right" className="relative w-full max-w-[280px] sm:max-w-[340px] aspect-square lg:max-w-md">
+                <div className="absolute inset-0 bg-gradient-to-tr from-[var(--color-wine)]/5 to-[var(--color-red)]/5 rounded-full blur-2xl z-0" />
+                <div className="relative w-full h-full mascot-float z-10">
+                  <Image
+                    src="/images/brand/mascota-uc.webp"
+                    alt="Nayo - Guardián del Conocimiento"
+                    fill
+                    className="object-contain drop-shadow-2xl"
+                    sizes="(max-width: 768px) 280px, 400px"
+                  />
+                </div>
               </AnimatedReveal>
             </div>
 
-            <div className="md:col-span-7">
-              <AnimatedReveal direction="left" delay={0.2}>
-                <p className="text-base sm:text-lg text-[var(--color-text)]/80 leading-relaxed font-sans">
-                  UC Universidad Continental continúa fortaleciendo su presencia académica en Tepic Nayarit, impulsando programas de formación para estudiantes que buscan avanzar en su desarrollo profesional.
+            {/* Columna Derecha: Texto de la Mascota */}
+            <div className="lg:col-span-7 space-y-6">
+              <AnimatedReveal direction="left">
+                <span className="inline-block px-3.5 py-1 text-xs font-bold uppercase tracking-widest text-[var(--color-red)] bg-[var(--color-red)]/10 rounded-full">
+                  Identidad y Símbolos
+                </span>
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[var(--color-wine)] mt-3 mb-5 tracking-tight uppercase leading-tight">
+                  Nayo, el Guardián del Conocimiento
+                </h2>
+                <p className="text-base sm:text-lg text-[var(--color-text)]/80 leading-relaxed font-sans text-balance">
+                  Nayo es la mascota oficial de UC Universidad Continental y representa el espíritu de la institución: una educación centrada en la sabiduría, el pensamiento crítico, la empatía y el compromiso con la transformación social.
                 </p>
               </AnimatedReveal>
             </div>
@@ -360,7 +485,7 @@ export function IdentityPage() {
         </div>
       </Section>
 
-      {/* 7. CTA FINAL */}
+      {/* 8. CTA FINAL */}
       <Section id="cta-final" background="light" padding="lg" className="relative overflow-hidden">
         <div className="relative max-w-5xl mx-auto bg-gradient-to-br from-[var(--color-wine)] to-[#3a0a1d] rounded-[2rem] p-8 sm:p-12 lg:p-16 text-white overflow-hidden shadow-2xl">
           
@@ -368,12 +493,12 @@ export function IdentityPage() {
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,var(--color-red),transparent_60%)] opacity-20" />
           
           {/* Mascota en el CTA */}
-          <div className="absolute -bottom-6 -right-6 w-32 h-32 sm:w-44 sm:h-44 md:w-56 md:h-56 opacity-95 pointer-events-none select-none z-0 mascot-float">
+          <div className="absolute -bottom-6 -right-6 w-32 h-32 sm:w-44 sm:h-44 md:w-56 md:h-56 opacity-[0.12] pointer-events-none select-none z-0 mascot-float">
             <Image
               src="/images/brand/mascota-uc.webp"
               alt="Mascota UC en Cierre"
               fill
-              className="object-contain object-bottom-right drop-shadow-md"
+              className="object-contain object-bottom-right"
               sizes="(max-width: 640px) 128px, (max-width: 768px) 176px, 224px"
             />
           </div>
@@ -386,14 +511,14 @@ export function IdentityPage() {
             </AnimatedReveal>
 
             <AnimatedReveal direction="up" delay={0.1}>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black mb-5 text-balance leading-tight">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black mb-5 text-balance leading-tight uppercase">
                 Construye tu camino profesional en UC
               </h2>
             </AnimatedReveal>
 
             <AnimatedReveal direction="up" delay={0.2}>
               <p className="text-sm sm:text-base lg:text-lg text-white/80 mb-10 text-balance leading-relaxed">
-                Explora la oferta académica y recibe orientación para elegir el programa que mejor se adapte a tus objetivos.
+                Explora nuestra oferta académica y recibe orientación para elegir el programa que mejor se adapte a tus objetivos.
               </p>
             </AnimatedReveal>
 
@@ -403,7 +528,7 @@ export function IdentityPage() {
                   href="/oferta-academica" 
                   variant="primary" 
                   size="lg" 
-                  className="bg-white text-[var(--color-wine)] hover:bg-[var(--color-cream)] hover:text-[var(--color-wine)] shadow-lg shadow-black/10 h-13 rounded-xl cursor-pointer"
+                  className="bg-white text-[var(--color-wine)] hover:bg-[var(--color-cream)] hover:text-[var(--color-wine)] shadow-lg shadow-black/10 h-13 rounded-xl cursor-pointer font-bold"
                 >
                   Ver oferta académica
                 </Button>
@@ -413,7 +538,7 @@ export function IdentityPage() {
                   rel="noopener noreferrer" 
                   variant="outline" 
                   size="lg" 
-                  className="border-white/30 text-white hover:bg-white/10 h-13 rounded-xl cursor-pointer"
+                  className="border-white/30 text-white hover:bg-white/10 h-13 rounded-xl cursor-pointer font-bold"
                 >
                   <MessageCircle className="mr-2 h-5 w-5 fill-white/10" />
                   Hablar con admisiones
