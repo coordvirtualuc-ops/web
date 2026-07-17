@@ -17,6 +17,11 @@ export type ProgramModality =
   | "1 fin de semana al mes"
   | "Por confirmar";
 
+export interface GraduateProfile {
+  intro: string;
+  competencies: string[];
+}
+
 export interface AcademicProgram {
   id: string;
   title: string;
@@ -29,7 +34,8 @@ export interface AcademicProgram {
   description: string;
   objective: string;
   highlights: string[];
-  profile: string[];
+  profile?: string[];
+  graduateProfile?: GraduateProfile;
   careerField: string[];
   differentiators: string[];
   whatsappMessage: string;
@@ -141,12 +147,19 @@ export const academicPrograms: AcademicProgram[] = [
       "Planeación de recursos humanos y financieros",
       "Creación de modelos de negocio innovadores",
     ],
-    profile: [
-      "Interés por el emprendimiento y los negocios",
-      "Capacidad de análisis y resolución de problemas",
-      "Habilidades de comunicación y liderazgo",
-      "Disposición para el trabajo en equipo",
-    ],
+    graduateProfile: {
+      intro: "La persona egresada será capaz de administrar organizaciones, coordinar recursos y diseñar estrategias orientadas al crecimiento, la eficiencia y la innovación empresarial.",
+      competencies: [
+        "Diseñar planes estratégicos para organizaciones públicas y privadas.",
+        "Administrar recursos humanos, financieros, materiales y tecnológicos.",
+        "Analizar información para la toma de decisiones empresariales.",
+        "Diseñar y evaluar proyectos de inversión y emprendimiento.",
+        "Coordinar equipos de trabajo y procesos organizacionales.",
+        "Implementar estrategias de comercialización y desarrollo de negocios.",
+        "Identificar oportunidades de innovación y mejora continua.",
+        "Aplicar principios éticos y de responsabilidad social.",
+      ],
+    },
     careerField: [
       "Empresas privadas de nivel nacional e internacional",
       "Consultoría en desarrollo organizacional",
@@ -175,12 +188,19 @@ export const academicPrograms: AcademicProgram[] = [
       "Uso de tecnologías y software contable avanzado",
       "Estrategias de sistemas electrónicos de control",
     ],
-    profile: [
-      "Afinidad por el análisis financiero y numérico",
-      "Sentido ético y de responsabilidad social",
-      "Interés por el marco fiscal y regulatorio",
-      "Atención al detalle y capacidad analítica",
-    ],
+    graduateProfile: {
+      intro: "La persona egresada será capaz de gestionar información financiera, contable y fiscal para apoyar el control, la transparencia y la toma de decisiones en las organizaciones.",
+      competencies: [
+        "Registrar y analizar operaciones contables.",
+        "Elaborar e interpretar estados financieros.",
+        "Aplicar disposiciones fiscales y tributarias vigentes.",
+        "Diseñar sistemas de control interno.",
+        "Participar en procesos de auditoría y fiscalización.",
+        "Evaluar costos, presupuestos y resultados financieros.",
+        "Utilizar herramientas digitales y sistemas contables.",
+        "Brindar asesoría financiera, contable y fiscal.",
+      ],
+    },
     careerField: [
       "Despachos contables e institucionales",
       "Dirección financiera y administrativa de empresas",
@@ -208,12 +228,19 @@ export const academicPrograms: AcademicProgram[] = [
       "Intervención y solución a necesidades educativas",
       "Dirección y administración de centros escolares",
     ],
-    profile: [
-      "Vocación por la enseñanza y el servicio social",
-      "Habilidades de empatía y comunicación asertiva",
-      "Interés por el diseño de estrategias pedagógicas",
-      "Capacidad de observación y análisis de problemáticas",
-    ],
+    graduateProfile: {
+      intro: "La persona egresada será capaz de diseñar, implementar y evaluar procesos educativos en distintos contextos, niveles y modalidades de enseñanza.",
+      competencies: [
+        "Diseñar programas, cursos y experiencias de aprendizaje.",
+        "Implementar estrategias didácticas centradas en el estudiante.",
+        "Evaluar procesos de enseñanza y resultados de aprendizaje.",
+        "Utilizar tecnologías educativas y recursos digitales.",
+        "Atender necesidades educativas y diversidad de contextos.",
+        "Desarrollar proyectos de intervención e innovación educativa.",
+        "Coordinar actividades académicas y de gestión escolar.",
+        "Investigar problemáticas relacionadas con la educación.",
+      ],
+    },
     careerField: [
       "Docencia en niveles escolares básicos y medios",
       "Diseño de contenidos y tecnología instruccional",
@@ -241,12 +268,19 @@ export const academicPrograms: AcademicProgram[] = [
       "Diseño de políticas y estrategias de prevención social",
       "Investigación del delito con rigor metodológico",
     ],
-    profile: [
-      "Interés por la investigación científica y forense",
-      "Criterio ético y de servicio social",
-      "Capacidad analítica y de observación rigurosa",
-      "Disposición para el trabajo en equipos multidisciplinarios",
-    ],
+    graduateProfile: {
+      intro: "La persona egresada será capaz de analizar fenómenos delictivos, aplicar metodologías de investigación y participar en estrategias de prevención, seguridad y procuración de justicia.",
+      competencies: [
+        "Analizar factores sociales, psicológicos y jurídicos relacionados con el delito.",
+        "Aplicar métodos y técnicas de investigación criminalística.",
+        "Participar en el procesamiento técnico de indicios.",
+        "Elaborar informes y dictámenes con sustento metodológico.",
+        "Diseñar estrategias de prevención social de la violencia y el delito.",
+        "Analizar perfiles y patrones de conducta delictiva.",
+        "Colaborar con equipos multidisciplinarios de seguridad y justicia.",
+        "Actuar con responsabilidad ética y apego a los derechos humanos.",
+      ],
+    },
     careerField: [
       "Instituciones de impartición y procuración de justicia",
       "Áreas de seguridad pública y prevención del delito",
@@ -274,12 +308,19 @@ export const academicPrograms: AcademicProgram[] = [
       "Desarrollo de competencias lingüísticas avanzadas",
       "Habilidades para la vinculación global intercultural",
     ],
-    profile: [
-      "Afinidad por los idiomas y la comunicación intercultural",
-      "Capacidad de autoaprendizaje y expresión oral/escrita",
-      "Interés por la pedagogía y la traducción",
-      "Sensibilidad y respeto por la diversidad cultural",
-    ],
+    graduateProfile: {
+      intro: "La persona egresada será capaz de comunicarse profesionalmente en lenguas extranjeras y aplicar sus competencias en educación, traducción, gestión cultural y contextos internacionales.",
+      competencies: [
+        "Comunicarse de forma oral y escrita en inglés y otra lengua extranjera.",
+        "Diseñar e impartir procesos de enseñanza de idiomas.",
+        "Aplicar metodologías didácticas para el aprendizaje lingüístico.",
+        "Participar en procesos de traducción e interpretación básica o especializada.",
+        "Elaborar materiales educativos y recursos lingüísticos.",
+        "Desarrollarse en ambientes multiculturales e internacionales.",
+        "Prepararse para certificaciones internacionales de idiomas.",
+        "Utilizar herramientas tecnológicas para la enseñanza y comunicación.",
+      ],
+    },
     careerField: [
       "Docencia de lenguas extranjeras en todos los niveles",
       "Servicios independientes de traducción y peritajes",
@@ -307,12 +348,19 @@ export const academicPrograms: AcademicProgram[] = [
       "Defensa y asesoramiento con sentido ético y humano",
       "Interpretación y litigación en diversas ramas del derecho",
     ],
-    profile: [
-      "Interés por la justicia y el bienestar social",
-      "Capacidad de argumentación, debate y oratoria",
-      "Sentido ético e interés por el marco jurídico nacional",
-      "Habilidades de lectura crítica y análisis de textos",
-    ],
+    graduateProfile: {
+      intro: "La persona egresada será capaz de interpretar y aplicar el marco jurídico, representar intereses legales y participar en la solución de conflictos con responsabilidad ética.",
+      competencies: [
+        "Interpretar leyes, reglamentos y criterios jurídicos.",
+        "Elaborar contratos, escritos, demandas y documentos legales.",
+        "Brindar asesoría jurídica a personas y organizaciones.",
+        "Participar en procedimientos civiles, penales, laborales, mercantiles y administrativos.",
+        "Diseñar estrategias para la prevención y solución de conflictos.",
+        "Argumentar de manera oral y escrita con sustento jurídico.",
+        "Aplicar mecanismos alternativos de solución de controversias.",
+        "Actuar con ética profesional y respeto a los derechos humanos.",
+      ],
+    },
     careerField: [
       "Litigio independiente en derecho civil, penal, familiar",
       "Asesoría jurídica corporativa e institucional",
@@ -341,12 +389,20 @@ export const academicPrograms: AcademicProgram[] = [
       "Automatización de procesos operativos en las organizaciones",
       "Administración de bases de datos y seguridad digital",
     ],
-    profile: [
-      "Interés por la programación, algoritmos y tecnología",
-      "Razonamiento lógico-matemático y analítico",
-      "Visión para la resolución de problemas técnicos y de negocio",
-      "Curiosidad por la innovación digital y automatización",
-    ],
+    graduateProfile: {
+      intro: "La persona egresada será capaz de desarrollar soluciones tecnológicas y aplicar herramientas digitales para optimizar procesos, crear productos y fortalecer modelos de negocio.",
+      competencies: [
+        "Diseñar y desarrollar aplicaciones web y sistemas de software.",
+        "Analizar requerimientos tecnológicos y necesidades empresariales.",
+        "Administrar bases de datos e infraestructura digital.",
+        "Automatizar procesos operativos y administrativos.",
+        "Diseñar soluciones de comercio electrónico y negocios digitales.",
+        "Implementar medidas básicas de seguridad informática.",
+        "Analizar datos para apoyar la toma de decisiones.",
+        "Coordinar proyectos tecnológicos y equipos multidisciplinarios.",
+        "Integrar inteligencia artificial y tecnologías emergentes en procesos empresariales.",
+      ],
+    },
     careerField: [
       "Desarrollo de software y aplicaciones web/móviles",
       "Dirección y consultoría de transformación digital",

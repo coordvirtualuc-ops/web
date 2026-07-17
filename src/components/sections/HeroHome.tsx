@@ -42,7 +42,6 @@ export function HeroHome() {
     { title: "Lenguas Extranjeras", wp: WHATSAPP_MESSAGES.lenguas, image: "/images/poster-lenguas.webp" },
     { title: "Licenciatura en Derecho", wp: WHATSAPP_MESSAGES.derecho, image: "/images/poster-derecho.webp" },
     { title: "Ingeniería en Sistemas Computacionales con Enfoque en Negocios Digitales", wp: WHATSAPP_MESSAGES.ingenieriaSistemas, image: "/images/poster-sistemas.webp" },
-    { title: "Maestría en Administración Pública", wp: WHATSAPP_MESSAGES.maestriaAdministracionPublica, image: "/images/poster-maestria-administracion-publica.webp" },
   ]
 
   const valuePropositions = [
