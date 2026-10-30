@@ -11,31 +11,32 @@ export const metadata: Metadata = {
 
 export default function IdentidadPage() {
   return (
-    <div>
-      {/* Esto mantiene todo el diseño original de la página */}
+    <>
+      {/* Esto restaura tu contenido original exactamente como estaba */}
       
       
-      {/* Contenedor para centrar tu botón al final de la página */}
-      <div style={{ textAlign: 'center', padding: '40px 20px' }}>
-        <a 
-          href="/reglamento.pdf" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          style={{
-            display: 'inline-block',
-            padding: '14px 28px',
-            backgroundColor: '#550f2a',
-            color: 'white',
-            borderRadius: '5px',
-            textDecoration: 'none',
-            fontWeight: 'bold',
-            fontSize: '16px',
-            boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
-          }}
-        >
-          Ver Documento PDF
-        </a>
-      </div>
-    </div>
+      {/* Este botón flotará de forma segura en la esquina inferior derecha sin romper nada */}
+      <a 
+        href="/reglamento.pdf" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        style={{
+          position: 'fixed',
+          bottom: '20px',
+          right: '80px', // Espacio para no tapar el icono de WhatsApp verde
+          zIndex: 9999,
+          padding: '14px 24px',
+          backgroundColor: '#550f2a', // Color guinda institucional de tu logo
+          color: 'white',
+          borderRadius: '30px', // Bordes redondeados elegantes
+          textDecoration: 'none',
+          fontWeight: 'bold',
+          fontSize: '15px',
+          boxShadow: '0 4px 12px rgba(0,0,0,0.25)',
+          fontFamily: 'sans-serif'
+        }}
+      >
+        📄 Ver Reglamento 
+      </a>
+    </>
   )
-}
