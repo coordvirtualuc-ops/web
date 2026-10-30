@@ -150,25 +150,36 @@ export function IdentityPage() {
               </AnimatedReveal>
 
               <AnimatedReveal direction="up" delay={0.3}>
-                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto">
-                  <Button
-                    href="/oferta-academica"
-                    variant="primary"
-                    size="lg"
-                    className="group text-base px-8 shadow-xl shadow-[var(--color-red)]/15 bg-[var(--color-red)] text-white hover:bg-[var(--color-wine)] h-13 rounded-xl cursor-pointer"
-                  >
-                    Conoce la oferta académica
-                    <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-                  </Button>
-                  <Button
-                    href="/inscribete"
-                    variant="outline"
-                    size="lg"
-                    className="border-[var(--color-wine)]/30 text-[var(--color-wine)] hover:bg-[var(--color-wine)] hover:text-white backdrop-blur-md h-13 rounded-xl cursor-pointer"
-                  >
-                    Inscríbete
-                  </Button>
-                </div>
+               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto">
+  <Button
+    href="/oferta-academica"
+    variant="primary"
+    size="lg"
+    className="group text-base px-8 shadow-xl shadow-[var(--color-red)]/15 bg-[var(--color-red)] text-white hover:bg-[var(--color-wine)] h-13 rounded-xl cursor-pointer"
+  >
+    Conoce la oferta académica
+    <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+  </Button>
+  
+  <Button
+    href="/inscribete"
+    variant="outline"
+    size="lg"
+    className="border-[var(--color-wine)]/30 text-[var(--color-wine)] hover:bg-[var(--color-wine)] hover:text-white backdrop-blur-md h-13 rounded-xl cursor-pointer"
+  >
+    Inscríbete
+  </Button>
+
+  {/* NUEZO BOTÓN REFORZADO PARA EL PDF */}
+  <a
+    href="/reglamento.pdf"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="inline-flex items-center justify-center font-semibold text-base px-6 h-13 rounded-xl text-white bg-[var(--color-wine)] hover:bg-[var(--color-red)] shadow-xl transition-all text-center cursor-pointer"
+  >
+    📄 Ver Reglamento
+  </a>
+</div>
               </AnimatedReveal>
             </div>
 
